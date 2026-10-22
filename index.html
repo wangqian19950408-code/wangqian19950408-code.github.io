@@ -470,6 +470,25 @@ body{font-size:var(--fs-body); line-height:var(--lh-body); letter-spacing:.005em
 .links a,.links .lk{gap:var(--sp-2); padding:var(--sp-2) 0}
 .copy{margin-top:var(--sp-2)}
 @media (max-width:860px){ .card .row{padding:var(--sp-4) var(--sp-5)} .work .body{padding:var(--sp-5) var(--gutter) var(--sp-6); gap:var(--sp-5)} .works-head{padding-top:var(--sp-7)} }
+
+/* ===== mobile fit: nothing may push the page wider than the screen ===== */
+html,body{overflow-x:clip; max-width:100%}
+.work .body > *{min-width:0}
+.card > .col{min-width:0}
+@media (max-width:860px){
+  .work .body{grid-template-columns:minmax(0,1fr) !important}
+  .hero .tl{white-space:normal; right:clamp(16px,3vw,40px); max-width:none}
+  .hero .tl .en{font-size:clamp(15px,4.2vw,18px)}
+  .works-head{flex-direction:column; align-items:flex-start}
+  .works-head p{max-width:none}
+  .nav{padding-right:calc(var(--gutter) + 48px); column-gap:4px}
+  .nav a{font-size:14px}
+  .cv li{grid-template-columns:7.2em minmax(0,1fr)}
+  .links{grid-template-columns:1fr !important}
+  .copy{flex-direction:column; gap:var(--sp-1)}
+  .marquee{max-width:100%}
+  .big{right:var(--gutter)}
+}
 </style>
 </head>
 <body>
