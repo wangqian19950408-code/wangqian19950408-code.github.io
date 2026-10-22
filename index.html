@@ -489,6 +489,14 @@ html,body{overflow-x:clip; max-width:100%}
   .marquee{max-width:100%}
   .big{right:var(--gutter)}
 }
+
+/* ===== mobile memory budget: fewer GPU layers, no full-screen effects ===== */
+@media (max-width:860px), (hover:none){
+  .grain,.fan-wrap .bloom{display:none !important}
+  .strip,.hero .arc,.me-full img{will-change:auto !important}
+  .nav{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(5,6,6,.96)}
+  .lb-bg{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(3,4,4,.92)}
+}
 </style>
 </head>
 <body>
@@ -583,12 +591,12 @@ html,body{overflow-x:clip; max-width:100%}
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
           <figure class="slide slide-video"><video src="whale_ad.mp4" poster="images/003.webp" muted loop playsinline controls preload="metadata" aria-label="WHALE 広告動画"></video></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/004.webp" alt="WHALE 公式サイト ファーストビュー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/005.webp" alt="WHALE 公式サイト 全体"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/006.webp" alt="PANDA 公式サイト ファーストビュー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/007.webp" alt="PANDA 公式サイト 全体"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/008.webp" alt="WHALE & PANDA — 展示会ブースのイメージ"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/009.webp" alt="WHALE & PANDA — ポスターと名刺"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/004.webp" srcset="images/m/004.webp 800w, images/004.webp 1904w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE 公式サイト ファーストビュー"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/005.webp" srcset="images/m/005.webp 800w, images/005.webp 1645w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE 公式サイト 全体"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/006.webp" srcset="images/m/006.webp 800w, images/006.webp 2212w" sizes="(max-width: 860px) 92vw, 62vw" alt="PANDA 公式サイト ファーストビュー"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/007.webp" srcset="images/m/007.webp 800w, images/007.webp 1849w" sizes="(max-width: 860px) 92vw, 62vw" alt="PANDA 公式サイト 全体"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/008.webp" srcset="images/m/008.webp 800w, images/008.webp 1500w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE & PANDA — 展示会ブースのイメージ"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/009.webp" srcset="images/m/009.webp 800w, images/009.webp 1800w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE & PANDA — ポスターと名刺"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -606,8 +614,8 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/010.webp" alt="ポスターシリーズ「SIGNAL」（仮） — 3色展開のポスター"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/011.webp" alt="ポスターシリーズ「SIGNAL」（仮） — ポスター単体"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/010.webp" srcset="images/m/010.webp 800w, images/010.webp 1600w" sizes="(max-width: 860px) 92vw, 62vw" alt="ポスターシリーズ「SIGNAL」（仮） — 3色展開のポスター"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/011.webp" srcset="images/m/011.webp 800w, images/011.webp 1600w" sizes="(max-width: 860px) 92vw, 62vw" alt="ポスターシリーズ「SIGNAL」（仮） — ポスター単体"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 02</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -625,8 +633,8 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/012.webp" alt="カフェブランド「ORBIT」（仮） — ロゴとカラーパレット"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/013.webp" alt="カフェブランド「ORBIT」（仮） — 名刺とカップへの展開"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/012.webp" srcset="images/m/012.webp 800w, images/012.webp 1600w" sizes="(max-width: 860px) 92vw, 62vw" alt="カフェブランド「ORBIT」（仮） — ロゴとカラーパレット"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/013.webp" srcset="images/m/013.webp 800w, images/013.webp 1600w" sizes="(max-width: 860px) 92vw, 62vw" alt="カフェブランド「ORBIT」（仮） — 名刺とカップへの展開"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 02</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -644,8 +652,8 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/014.webp" alt="デザイン誌「FORM」（仮） — 表紙と見開き"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/015.webp" alt="デザイン誌「FORM」（仮） — 表紙のシリーズ展開"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/014.webp" srcset="images/m/014.webp 800w, images/014.webp 1600w" sizes="(max-width: 860px) 92vw, 62vw" alt="デザイン誌「FORM」（仮） — 表紙と見開き"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/015.webp" srcset="images/m/015.webp 800w, images/015.webp 1600w" sizes="(max-width: 860px) 92vw, 62vw" alt="デザイン誌「FORM」（仮） — 表紙のシリーズ展開"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 02</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -663,13 +671,13 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/016.webp" alt="Donkey Kong Country 駅貼り広告 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/017.webp" alt="Donkey Kong Country 駅貼り広告 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/018.webp" alt="Donkey Kong Country 駅貼り広告 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/019.webp" alt="Donkey Kong Country 駅貼り広告 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/020.webp" alt="Donkey Kong Country 駅貼り広告 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/021.webp" alt="Donkey Kong Country 駅貼り広告 — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/022.webp" alt="Donkey Kong Country 駅貼り広告 — 7"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/016.webp" srcset="images/m/016.webp 800w, images/016.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/017.webp" srcset="images/m/017.webp 800w, images/017.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/018.webp" srcset="images/m/018.webp 800w, images/018.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/019.webp" srcset="images/m/019.webp 800w, images/019.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/020.webp" srcset="images/m/020.webp 800w, images/020.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/021.webp" srcset="images/m/021.webp 800w, images/021.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 6"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/022.webp" srcset="images/m/022.webp 800w, images/022.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 7"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -687,11 +695,11 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/023.webp" alt="Monster Energy 年間キャンペーン — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/024.webp" alt="Monster Energy 年間キャンペーン — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/025.webp" alt="Monster Energy 年間キャンペーン — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/026.webp" alt="Monster Energy 年間キャンペーン — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/027.webp" alt="Monster Energy 年間キャンペーン — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/023.webp" srcset="images/m/023.webp 800w, images/023.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/024.webp" srcset="images/m/024.webp 800w, images/024.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/025.webp" srcset="images/m/025.webp 800w, images/025.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/026.webp" srcset="images/m/026.webp 800w, images/026.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/027.webp" srcset="images/m/027.webp 800w, images/027.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 5"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 05</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -709,12 +717,12 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/028.webp" alt="WELLCNE &amp; FAROme 展示会 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/029.webp" alt="WELLCNE &amp; FAROme 展示会 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/030.webp" alt="WELLCNE &amp; FAROme 展示会 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/031.webp" alt="WELLCNE &amp; FAROme 展示会 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/032.webp" alt="WELLCNE &amp; FAROme 展示会 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/033.webp" alt="WELLCNE &amp; FAROme 展示会 — 6"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/028.webp" srcset="images/m/028.webp 800w, images/028.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/029.webp" srcset="images/m/029.webp 800w, images/029.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/030.webp" srcset="images/m/030.webp 800w, images/030.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/031.webp" srcset="images/m/031.webp 800w, images/031.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/032.webp" srcset="images/m/032.webp 800w, images/032.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/033.webp" srcset="images/m/033.webp 800w, images/033.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 6"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -732,11 +740,11 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/034.webp" alt="P&amp;G EXPO パネル・ポスター — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/035.webp" alt="P&amp;G EXPO パネル・ポスター — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/036.webp" alt="P&amp;G EXPO パネル・ポスター — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/037.webp" alt="P&amp;G EXPO パネル・ポスター — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/038.webp" alt="P&amp;G EXPO パネル・ポスター — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/034.webp" srcset="images/m/034.webp 800w, images/034.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/035.webp" srcset="images/m/035.webp 800w, images/035.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/036.webp" srcset="images/m/036.webp 800w, images/036.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/037.webp" srcset="images/m/037.webp 800w, images/037.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/038.webp" srcset="images/m/038.webp 800w, images/038.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 5"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 05</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -754,15 +762,15 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/039.webp" alt="DAMA collection 年間誌面制作 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/040.webp" alt="DAMA collection 年間誌面制作 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/041.webp" alt="DAMA collection 年間誌面制作 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/042.webp" alt="DAMA collection 年間誌面制作 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/043.webp" alt="DAMA collection 年間誌面制作 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/044.webp" alt="DAMA collection 年間誌面制作 — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/045.webp" alt="DAMA collection 年間誌面制作 — 7"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/046.webp" alt="DAMA collection 年間誌面制作 — 8"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/047.webp" alt="DAMA collection 年間誌面制作 — 9"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/039.webp" srcset="images/m/039.webp 800w, images/039.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/040.webp" srcset="images/m/040.webp 800w, images/040.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/041.webp" srcset="images/m/041.webp 800w, images/041.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/042.webp" srcset="images/m/042.webp 800w, images/042.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/043.webp" srcset="images/m/043.webp 800w, images/043.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/044.webp" srcset="images/m/044.webp 800w, images/044.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 6"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/045.webp" srcset="images/m/045.webp 800w, images/045.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 7"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/046.webp" srcset="images/m/046.webp 800w, images/046.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 8"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/047.webp" srcset="images/m/047.webp 800w, images/047.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 9"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 09</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -780,17 +788,17 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/048.webp" alt="Co Point — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/049.webp" alt="Co Point — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/050.webp" alt="Co Point — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/051.webp" alt="Co Point — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/052.webp" alt="Co Point — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/053.webp" alt="Co Point — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/054.webp" alt="Co Point — 7"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/055.webp" alt="Co Point — 8"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/056.webp" alt="Co Point — 9"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/057.webp" alt="Co Point — 10"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/058.webp" alt="Co Point — 11"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/048.webp" srcset="images/m/048.webp 800w, images/048.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/049.webp" srcset="images/m/049.webp 800w, images/049.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/050.webp" srcset="images/m/050.webp 800w, images/050.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/051.webp" srcset="images/m/051.webp 800w, images/051.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/052.webp" srcset="images/m/052.webp 800w, images/052.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/053.webp" srcset="images/m/053.webp 800w, images/053.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 6"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/054.webp" srcset="images/m/054.webp 800w, images/054.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 7"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/055.webp" srcset="images/m/055.webp 800w, images/055.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 8"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/056.webp" srcset="images/m/056.webp 800w, images/056.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 9"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/057.webp" srcset="images/m/057.webp 800w, images/057.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 10"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/058.webp" srcset="images/m/058.webp 800w, images/058.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 11"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 11</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -808,13 +816,13 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/059.webp" alt="ぼくら 夜行性動物 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/060.webp" alt="ぼくら 夜行性動物 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/061.webp" alt="ぼくら 夜行性動物 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/062.webp" alt="ぼくら 夜行性動物 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/063.webp" alt="ぼくら 夜行性動物 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/064.webp" alt="ぼくら 夜行性動物 — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/065.webp" alt="ぼくら 夜行性動物 — 7"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/059.webp" srcset="images/m/059.webp 800w, images/059.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/060.webp" srcset="images/m/060.webp 800w, images/060.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/061.webp" srcset="images/m/061.webp 800w, images/061.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/062.webp" srcset="images/m/062.webp 800w, images/062.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/063.webp" srcset="images/m/063.webp 800w, images/063.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/064.webp" srcset="images/m/064.webp 800w, images/064.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 6"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/065.webp" srcset="images/m/065.webp 800w, images/065.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 7"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -832,9 +840,9 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/066.webp" alt="Perrier &amp; S.Pellegrino — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/067.webp" alt="Perrier &amp; S.Pellegrino — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/068.webp" alt="Perrier &amp; S.Pellegrino — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/066.webp" srcset="images/m/066.webp 800w, images/066.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Perrier &amp; S.Pellegrino — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/067.webp" srcset="images/m/067.webp 800w, images/067.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Perrier &amp; S.Pellegrino — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/068.webp" srcset="images/m/068.webp 800w, images/068.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Perrier &amp; S.Pellegrino — 3"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -852,12 +860,12 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/069.webp" alt="TOAmart パッケージデザイン — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/070.webp" alt="TOAmart パッケージデザイン — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/071.webp" alt="TOAmart パッケージデザイン — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/072.webp" alt="TOAmart パッケージデザイン — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/073.webp" alt="TOAmart パッケージデザイン — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/074.webp" alt="TOAmart パッケージデザイン — 6"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/069.webp" srcset="images/m/069.webp 800w, images/069.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/070.webp" srcset="images/m/070.webp 800w, images/070.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/071.webp" srcset="images/m/071.webp 800w, images/071.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/072.webp" srcset="images/m/072.webp 800w, images/072.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 4"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/073.webp" srcset="images/m/073.webp 800w, images/073.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 5"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/074.webp" srcset="images/m/074.webp 800w, images/074.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 6"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -875,9 +883,9 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/075.webp" alt="42SF 企画展 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/076.webp" alt="42SF 企画展 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/077.webp" alt="42SF 企画展 — 3"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/075.webp" srcset="images/m/075.webp 800w, images/075.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="42SF 企画展 — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/076.webp" srcset="images/m/076.webp 800w, images/076.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="42SF 企画展 — 2"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/077.webp" srcset="images/m/077.webp 800w, images/077.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="42SF 企画展 — 3"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -895,7 +903,7 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/078.webp" alt="じっとり — 1"></figure>
+          <figure class="slide"><img loading="lazy" decoding="async" src="images/078.webp" srcset="images/m/078.webp 800w, images/078.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="じっとり — 1"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 01</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -1386,7 +1394,7 @@ html,body{overflow-x:clip; max-width:100%}
     const sx = st.getContext('2d'); sx.fillStyle = '#fff'; sx.fillRect(0,0,1,1); sx.fillStyle = 'rgba(255,255,255,.3)'; sx.fillRect(1,0,1,1);
     let W=0, H=0, D=1, pat=null;
     function size(){
-      D = Math.min(1.5, devicePixelRatio || 1);
+      D = matchMedia('(max-width: 860px), (hover: none)').matches ? 1 : Math.min(1.5, devicePixelRatio || 1);
       const r = cv.parentElement.getBoundingClientRect(); W = r.width; H = r.height;
       cv.width = Math.round(W*D); cv.height = Math.round(H*D);
       off.width = Math.round(W/2); off.height = Math.round(H/2);
@@ -1435,7 +1443,7 @@ html,body{overflow-x:clip; max-width:100%}
     let last = 0;
     function draw(now){
       requestAnimationFrame(draw);
-      if(!heroOn || now - last < 33) return; last = now;
+      if(!heroOn || now - last < (W < 860 ? 50 : 33)) return; last = now;
       const t = now/1000, groups = blooms(t);
       flower(groups);
       ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0,0,W,H);
