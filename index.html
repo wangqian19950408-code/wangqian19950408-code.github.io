@@ -530,6 +530,8 @@ html,body{overflow-x:clip; max-width:100%}
 .roller-row #nextWord{order:3}
 .slide img[width]{height:100%; width:auto}
 .slide-loop video{pointer-events:none}
+.work > .tab, .work > .body{transition:opacity .3s ease}
+.work.buried > .tab, .work.buried > .body{opacity:0}
 </style>
 </head>
 <body>
@@ -1372,6 +1374,9 @@ html,body{overflow-x:clip; max-width:100%}
       }
       const q = Math.round(p*100)/100;
       if(w._p !== q){ w._p = q; w.style.setProperty('--dim', reduce ? 0 : q*.14); }
+      /* once a panel is fully covered and only a thin edge of it shows, hide its text so stacked edges never overlap into garbled lines */
+      const bur = q >= .98 && tab < 40;
+      if(w._b !== bur){ w._b = bur; w.classList.toggle('buried', bur); }
     });
   }
   layoutWorks();
