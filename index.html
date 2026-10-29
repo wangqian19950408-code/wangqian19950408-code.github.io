@@ -497,6 +497,39 @@ html,body{overflow-x:clip; max-width:100%}
   .nav{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(5,6,6,.96)}
   .lb-bg{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(3,4,4,.92)}
 }
+
+/* about reveal — single clip-path move, no flip */
+.me-full{transform:none !important; will-change:clip-path}
+.me-full.reveal{transition:clip-path 1.1s cubic-bezier(.65,0,.2,1) !important}
+.me-full,.me-full img,.me-full .mf-cap,.me-full .mf-cap > *,.me-full .mf-cap li{transition:none !important}
+.card .solo .strip.me-card{display:none !important}
+.me-full .mf-no,.me-full .mf-pal,.me-full .mf-sw,.me-full .tint{display:none !important}
+
+/* works header — large grey type, superscript count, ○ bilingual index */
+.works-head{display:block !important}
+.works-head h2.big-t{font-size:clamp(76px,16vw,270px); font-weight:500; line-height:.84; letter-spacing:-.045em; color:#c8c8c6; text-transform:uppercase; margin:0}
+.big-t sup{font-size:.26em; font-weight:400; letter-spacing:0; vertical-align:top; position:relative; top:.08em; margin-left:.06em}
+.idx{list-style:none; margin:clamp(56px,9vw,140px) 0 0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:30px 32px}
+.idx a{display:block; color:#d9d9d7; text-decoration:none; font-size:16px; line-height:1.35; transition:color .25s}
+.idx a span::before{content:"○"; margin-right:.2em}
+.idx small{display:block; font-size:16px; color:#9b9b99; text-transform:uppercase; letter-spacing:.01em}
+.idx a:hover,.idx a:hover small{color:#fff}
+@media (max-width:860px){ .idx{grid-template-columns:1fr 1fr; gap:22px 16px} .idx a,.idx small{font-size:14px} }
+
+/* tab strip: number, title and meta share one centre line */
+.work .tab{align-items:center !important; padding-top:0 !important}
+/* footer: no mini fan */
+.foot .mini{display:none !important}
+.foot .skills{margin-bottom:clamp(56px,8vw,110px) !important}
+.links-p .ended{padding:6px 0; opacity:.6; font-weight:400}
+/* About: "Wang Qian makes" + the rolling word read as one sentence */
+.card .row.title-row{border-bottom:0; padding-bottom:0}
+.card .row.roller-row{padding-top:6px}
+.roller-row .word-window{text-align:left; font-weight:400; order:1}
+.roller-row #prevWord{order:2}
+.roller-row #nextWord{order:3}
+.slide img[width]{height:100%; width:auto}
+.slide-loop video{pointer-events:none}
 </style>
 </head>
 <body>
@@ -524,7 +557,6 @@ html,body{overflow-x:clip; max-width:100%}
   <div class="arc" id="arc" aria-hidden="true"><i></i></div>
   <canvas class="bgfx" id="bgfx" aria-hidden="true"></canvas>
   <div class="dither" aria-hidden="true"></div>
-  <div class="trail" id="trail" aria-hidden="true"></div>
   <div class="fan-wrap"><div class="bloom" aria-hidden="true"></div><div class="floor" aria-hidden="true"></div><div class="fan" id="heroFan" aria-label="Disciplines — choose one to jump to the matching project"></div></div>
   <p class="sig">Wang Qian</p>
   <h1 class="big" id="big" aria-label="Portfolio">Portfolio<sup aria-hidden="true">©26</sup></h1>
@@ -555,8 +587,8 @@ html,body{overflow-x:clip; max-width:100%}
     </div>
     <div class="col">
       <div class="row top"><span>About</span><span>Tokyo, Japan</span></div>
-      <div class="row"><h2 id="aboutTitle">Wang Qian<br>makes</h2></div>
-      <div class="row">
+      <div class="row title-row"><h2 id="aboutTitle">Wang Qian<br>makes</h2></div>
+      <div class="row roller-row">
         <div class="roller">
           <button type="button" id="prevWord" aria-label="Previous discipline">‹</button>
           <div class="word-window" aria-live="polite"><div class="word-track" id="wordTrack"></div></div>
@@ -575,8 +607,26 @@ html,body{overflow-x:clip; max-width:100%}
 
 <section class="works" id="works" aria-labelledby="worksTitle">
   <div class="works-head">
-    <h2 id="worksTitle">Selected<br>work</h2>
-    <p>15 projects across campaigns, exhibitions, editorial, packaging, UI/UX and illustration, 2017〜2026.</p>
+    <h2 id="worksTitle" class="big-t">Works<sup>17</sup></h2>
+    <ol class="idx">
+      <li><a href="#w1"><span>AIツール</span><small>WHALE &amp; PANDA</small></a></li>
+      <li><a href="#w2"><span>キャンペーン</span><small>Yahoo! JAPAN</small></a></li>
+      <li><a href="#w3"><span>イベント・グッズ</span><small>FANME</small></a></li>
+      <li><a href="#w4"><span>クライアントワーク</span><small>Client Works</small></a></li>
+      <li><a href="#w16"><span>LP / 採用</span><small>TikTok Shop Intern</small></a></li>
+      <li><a href="#w17"><span>テーマビジュアル</span><small>WONDER</small></a></li>
+      <li><a href="#w5"><span>駅貼り広告</span><small>Donkey Kong Country</small></a></li>
+      <li><a href="#w6"><span>年間KV</span><small>Monster Energy</small></a></li>
+      <li><a href="#w7"><span>展示会</span><small>WELLCNE &amp; FAROme</small></a></li>
+      <li><a href="#w8"><span>EXPOパネル</span><small>P&amp;G</small></a></li>
+      <li><a href="#w9"><span>誌面デザイン</span><small>DAMA collection</small></a></li>
+      <li><a href="#w10"><span>アプリ設計</span><small>Co Point</small></a></li>
+      <li><a href="#w11"><span>ブランド</span><small>ぼくら 夜行性動物</small></a></li>
+      <li><a href="#w12"><span>ビジュアル</span><small>Perrier</small></a></li>
+      <li><a href="#w13"><span>パッケージ</span><small>TOAmart</small></a></li>
+      <li><a href="#w14"><span>企画展</span><small>42SF 企画展</small></a></li>
+      <li><a href="#w15"><span>写真</span><small>じっとり</small></a></li>
+    </ol>
   </div>
 
   <article class="work" data-tone="paper" id="w1">
@@ -591,12 +641,12 @@ html,body{overflow-x:clip; max-width:100%}
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
           <figure class="slide slide-video"><video src="whale_ad.mp4" poster="images/003.webp" muted loop playsinline controls preload="metadata" aria-label="WHALE 広告動画"></video></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/004.webp" srcset="images/m/004.webp 800w, images/004.webp 1904w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE 公式サイト ファーストビュー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/005.webp" srcset="images/m/005.webp 800w, images/005.webp 1645w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE 公式サイト 全体"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/006.webp" srcset="images/m/006.webp 800w, images/006.webp 2212w" sizes="(max-width: 860px) 92vw, 62vw" alt="PANDA 公式サイト ファーストビュー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/007.webp" srcset="images/m/007.webp 800w, images/007.webp 1849w" sizes="(max-width: 860px) 92vw, 62vw" alt="PANDA 公式サイト 全体"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/008.webp" srcset="images/m/008.webp 800w, images/008.webp 1500w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE & PANDA — 展示会ブースのイメージ"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/009.webp" srcset="images/m/009.webp 800w, images/009.webp 1800w" sizes="(max-width: 860px) 92vw, 62vw" alt="WHALE & PANDA — ポスターと名刺"></figure>
+          <figure class="slide"><img width="1904" height="1824" decoding="async" data-src="images/004.webp" data-srcset="images/m/004.webp 800w, images/004.webp 1904w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.044)" alt="WHALE 公式サイト ファーストビュー"></figure>
+          <figure class="slide"><img width="1645" height="1500" decoding="async" data-src="images/005.webp" data-srcset="images/m/005.webp 800w, images/005.webp 1645w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.097)" alt="WHALE 公式サイト 全体"></figure>
+          <figure class="slide"><img width="2212" height="1824" decoding="async" data-src="images/006.webp" data-srcset="images/m/006.webp 800w, images/006.webp 2212w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.213)" alt="PANDA 公式サイト ファーストビュー"></figure>
+          <figure class="slide"><img width="1849" height="1500" decoding="async" data-src="images/007.webp" data-srcset="images/m/007.webp 800w, images/007.webp 1849w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.233)" alt="PANDA 公式サイト 全体"></figure>
+          <figure class="slide"><img width="1500" height="843" decoding="async" data-src="images/008.webp" data-srcset="images/m/008.webp 800w, images/008.webp 1500w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.779)" alt="WHALE & PANDA — 展示会ブースのイメージ"></figure>
+          <figure class="slide"><img width="1800" height="1125" decoding="async" data-src="images/009.webp" data-srcset="images/m/009.webp 800w, images/009.webp 1800w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.6)" alt="WHALE & PANDA — ポスターと名刺"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -605,70 +655,120 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="teal" id="w2">
-    <a class="tab" href="#w2"><span>02</span><span class="t">Yahoo! JAPAN</span><span class="m cat">Key visual / Banner</span><span class="m">2026</span></a>
+    <a class="tab" href="#w2"><span>02</span><span class="t">Yahoo! JAPAN</span><span class="m cat">Web / Key visual / Banner</span><span class="m">2026</span></a>
     <div class="body">
       <div>
         <h3>ヤフーアプリ × ホロカ</h3>
-        <p class="desc">Yahoo! JAPANアプリと「ホロカ」のコラボ応援キャンペーン。キービジュアルを起点に、アプリ内の掲載枠や告知バナーなど、サイズの異なる複数のクリエイティブへ展開した。キャラクターの魅力を活かしながら、キャンペーン内容と参加方法が一目で伝わる構成を意識した。</p>
-        <div class="marquee" aria-hidden="true"><div>Key visual · Banner · Campaign · App · Yahoo! JAPAN · 2026 · Key visual · Banner · Campaign · App · Yahoo! JAPAN · 2026 · </div></div>
+        <p class="desc">LINEヤフーの「Yahoo! JAPAN」アプリと、VTuberグループ「ホロライブ」および「ホロライブオフィシャルカードゲーム（ホロカ）」による初のコラボキャンペーン（2026年2月27日〜3月31日）。キービジュアルを起点に、特設サイト（PC / SP）と検定コンテンツの画面、応援ミッションを伝えるバナー、アプリ内の掲載枠や告知バナーまで、キャンペーンに関わるクリエイティブを一貫してデザインした。キャラクターの魅力を活かしながら、「何をすると何がもらえるのか」が一目で伝わる構成を意識した。</p>
+        <div class="marquee" aria-hidden="true"><div>Web design · Landing page · Key visual · Banner · Campaign · Yahoo! JAPAN · 2026 · Web design · Landing page · Key visual · Banner · Campaign · Yahoo! JAPAN · 2026 · </div></div>
+        <p class="links-p"><a href="https://ly-hololive-campaign.com/" target="_blank" rel="noopener">ly-hololive-campaign.com ↗</a><span class="ended">※ キャンペーンは終了しました</span></p>
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/107.webp" srcset="images/m/107.webp 800w, images/107.webp 1280w" sizes="(max-width: 860px) 92vw, 62vw" alt="ヤフーアプリ × ホロカ — キービジュアル"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/093.webp" srcset="images/m/093.webp 800w, images/093.webp 1956w" sizes="(max-width: 860px) 92vw, 62vw" alt="ヤフーアプリ × ホロカ — キャンペーン告知バナー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/094.webp" srcset="images/m/094.webp 800w, images/094.webp 1748w" sizes="(max-width: 860px) 92vw, 62vw" alt="ヤフーアプリ × ホロカ — バナー展開一覧"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/095.webp" srcset="images/m/095.webp 800w, images/095.webp 1386w" sizes="(max-width: 860px) 92vw, 62vw" alt="ヤフーアプリ × ホロカ — 縦型ビジュアルとアプリ内掲載イメージ"></figure>
+          <figure class="slide"><img width="1280" height="832" decoding="async" data-src="images/107.webp" data-srcset="images/m/107.webp 800w, images/107.webp 1280w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.538)" alt="ヤフーアプリ × ホロカ — キービジュアル"></figure>
+          <figure class="slide"><img width="1142" height="1100" decoding="async" data-src="images/119.webp" data-srcset="images/m/119.webp 800w, images/119.webp 1142w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.038)" alt="特設サイト（PC / SP）"></figure>
+          <figure class="slide"><img width="2537" height="1100" decoding="async" data-src="images/120.webp" data-srcset="images/m/120.webp 800w, images/120.webp 2537w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.306)" alt="特設サイト内の応援ミッション バナー"></figure>
+          <figure class="slide"><img width="1956" height="1100" decoding="async" data-src="images/093.webp" data-srcset="images/m/093.webp 800w, images/093.webp 1956w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.778)" alt="キャンペーン告知バナー"></figure>
+          <figure class="slide"><img width="1255" height="1100" decoding="async" data-src="images/108.webp" data-srcset="images/m/108.webp 800w, images/108.webp 1255w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.141)" alt="応援ミッションとバナー展開"></figure>
+          <figure class="slide"><img width="1386" height="1100" decoding="async" data-src="images/095.webp" data-srcset="images/m/095.webp 800w, images/095.webp 1386w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.26)" alt="縦型ビジュアルとアプリ内掲載イメージ"></figure>
+          <figure class="slide"><img width="2300" height="1100" decoding="async" data-src="images/109.webp" data-srcset="images/m/109.webp 800w, images/109.webp 2300w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.091)" alt="LINEヤフー株式会社 プレスリリース（2026.03.03）"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
-        <div class="g-bar"><span class="g-count">01 / 04</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
+        <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
     </div>
   </article>
 
   <article class="work" data-tone="mist" id="w3">
-    <a class="tab" href="#w3"><span>03</span><span class="t">FANME</span><span class="m cat">Banner / Goods</span><span class="m">2025〜26</span></a>
+    <a class="tab" href="#w3"><span>03</span><span class="t">FANME</span><span class="m cat">Web / Banner / Goods</span><span class="m">2025〜26</span></a>
     <div class="body">
       <div>
-        <h3>FANME バナー &amp; グッズ</h3>
-        <p class="desc">クリエイター向けプラットフォーム「FANME」のキャンペーン・イベントバナーと、クリエイターのオリジナルグッズ。出品キャンペーンからハロウィン、クリスマス、バレンタインなどの季節イベントまで、企画ごとに世界観を描き分けた。アクリルスタンドや缶バッジ、キーホルダーなどのグッズデザインも担当した。</p>
-        <div class="marquee" aria-hidden="true"><div>Banner · Campaign · Event · Goods · Acrylic stand · FANME · 2025〜26 · Banner · Campaign · Event · Goods · Acrylic stand · FANME · 2025〜26 · </div></div>
+        <h3>FANME イベント &amp; グッズ</h3>
+        <p class="desc">クリエイターが自分のショップを開き、写真・ボイス・動画・ガチャなどのデジタルコンテンツやグッズを、ファンへ直接届けられるプラットフォーム「FANME」。“好き”を応援したいファンと、それに応えたいクリエイターをつなぐ場所として、サービスの熱量をビジュアルで伝えることを担当した。新規クリエイターを呼び込む出品キャンペーンから、ハロウィン、クリスマス、バレンタイン、アワードまで、企画ごとに世界観を大胆に描き分けながら、FANMEらしいポップで親しみやすいトーンは一貫させた。イベントごとの特設ページ（SP）では、開催期間や参加方法、ランキング賞品まで、長いページでも迷わず読み進められる構成を設計した。アクリルスタンド、缶バッジ、キーホルダーなど、ファンの手元に“推し”を届けるオリジナルグッズのデザインも手がけた。</p>
+        <div class="marquee" aria-hidden="true"><div>Web design · Event page · Banner · Campaign · Goods · Acrylic stand · FANME · 2025〜26 · Web design · Event page · Banner · Campaign · Goods · Acrylic stand · FANME · 2025〜26 · </div></div>
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/096.webp" srcset="images/m/096.webp 800w, images/096.webp 2160w" sizes="(max-width: 860px) 92vw, 62vw" alt="FANME — バナー一覧"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/097.webp" srcset="images/m/097.webp 800w, images/097.webp 1944w" sizes="(max-width: 860px) 92vw, 62vw" alt="FANME — 季節イベントバナー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/098.webp" srcset="images/m/098.webp 800w, images/098.webp 2612w" sizes="(max-width: 860px) 92vw, 62vw" alt="FANME — 出品キャンペーンバナー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/099.webp" srcset="images/m/099.webp 800w, images/099.webp 1832w" sizes="(max-width: 860px) 92vw, 62vw" alt="FANME — オリジナルグッズ"></figure>
+          <figure class="slide"><img width="2000" height="1100" decoding="async" data-src="images/110.webp" data-srcset="images/m/110.webp 800w, images/110.webp 2000w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.818)" alt="FANME — バナーのパターン展開"></figure>
+          <figure class="slide"><img width="2254" height="1100" decoding="async" data-src="images/121.webp" data-srcset="images/m/121.webp 800w, images/121.webp 2254w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.049)" alt="FANME — イベント特設ページ（SP）"></figure>
+          <figure class="slide"><img width="2034" height="1100" decoding="async" data-src="images/122.webp" data-srcset="images/m/122.webp 800w, images/122.webp 2034w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.849)" alt="FANME — イベントページ全体構成"></figure>
+          <figure class="slide"><img width="3283" height="1100" decoding="async" data-src="images/111.webp" data-srcset="images/m/111.webp 800w, images/111.webp 3283w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.985)" alt="FANME — 季節イベントバナー"></figure>
+          <figure class="slide"><img width="2793" height="1100" decoding="async" data-src="images/112.webp" data-srcset="images/m/112.webp 800w, images/112.webp 2793w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.539)" alt="FANME — 出品キャンペーンバナー"></figure>
+          <figure class="slide"><img width="1939" height="1100" decoding="async" data-src="images/113.webp" data-srcset="images/m/113.webp 800w, images/113.webp 1939w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.763)" alt="FANME — オリジナルグッズ"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
-        <div class="g-bar"><span class="g-count">01 / 04</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
+        <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
     </div>
   </article>
 
   <article class="work" data-tone="ink" id="w4">
-    <a class="tab" href="#w4"><span>04</span><span class="t">Client Works</span><span class="m cat">Banner / Panel</span><span class="m">2025〜26</span></a>
+    <a class="tab" href="#w4"><span>04</span><span class="t">Client Works</span><span class="m cat">Key visual / Banner / Flyer</span><span class="m">2025〜26</span></a>
     <div class="body">
       <div>
         <h3>クライアントワーク</h3>
-        <p class="desc">TORIHADAで担当した、さまざまなクライアントの広告ビジュアル。楽天「LUXURY BEAUTY」のメイク企画バナー、docomo「ahamo」のバナー、フルーティス診断キャンペーン、トップバリュ×リンネルのタイアップ、SNS講座の告知、美容・食品の販促パネルなど。ブランドごとのトーンに合わせて、写真・イラスト・文字組みを使い分けた。</p>
-        <div class="marquee" aria-hidden="true"><div>Banner · Advertising · Beauty · Telecom · Food · Panel · 2025〜26 · Banner · Advertising · Beauty · Telecom · Food · Panel · 2025〜26 · </div></div>
+        <p class="desc">TORIHADAで担当した、さまざまなクライアントの広告ビジュアル。ミツカン公式5アカウントが6日間リレーで開催した「#夏のミツカン便」では、DAY1〜6のキービジュアルをシリーズで設計し、DAY1の投稿はX上で18.4万回表示、3,561件のリポストを記録した。ほかに、BANOBAGI × ニシコリのコラボキャンペーン「真夏のスターライト」のフライヤーとビジュアル、楽天「LUXURY BEAUTY」のメイク企画バナー、docomo「ahamo」のバナー、ミツカン「フルーティス」の診断キャンペーン、トップバリュ×リンネルのタイアップ、美容・食品の販促パネルなど。ブランドごとのトーンに合わせて、写真・イラスト・文字組みを使い分けた。</p>
+        <div class="marquee" aria-hidden="true"><div>Key visual · SNS campaign · Banner · Flyer · Beauty · Food · Panel · 2025〜26 · Key visual · SNS campaign · Banner · Flyer · Beauty · Food · Panel · 2025〜26 · </div></div>
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/100.webp" srcset="images/m/100.webp 800w, images/100.webp 1767w" sizes="(max-width: 860px) 92vw, 62vw" alt="楽天 LUXURY BEAUTY — メイク企画バナー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/101.webp" srcset="images/m/101.webp 800w, images/101.webp 1844w" sizes="(max-width: 860px) 92vw, 62vw" alt="docomo ahamo — バナー"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/102.webp" srcset="images/m/102.webp 800w, images/102.webp 2308w" sizes="(max-width: 860px) 92vw, 62vw" alt="SNS講座・フルーティス・トップバリュ — 広告ビジュアル"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/103.webp" srcset="images/m/103.webp 800w, images/103.webp 2694w" sizes="(max-width: 860px) 92vw, 62vw" alt="販促パネル"></figure>
+          <figure class="slide"><img width="1575" height="1100" decoding="async" data-src="images/123.webp" data-srcset="images/m/123.webp 800w, images/123.webp 1575w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.432)" alt="ミツカン「#夏のミツカン便」DAY1–6"></figure>
+          <figure class="slide"><img width="2150" height="1100" decoding="async" data-src="images/124.webp" data-srcset="images/m/124.webp 800w, images/124.webp 2150w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.955)" alt="ミツカン「#夏のミツカン便」X投稿の反響"></figure>
+          <figure class="slide"><img width="1559" height="1100" decoding="async" data-src="images/114.webp" data-srcset="images/m/114.webp 800w, images/114.webp 1559w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.417)" alt="楽天 LUXURY BEAUTY — メイク企画バナー"></figure>
+          <figure class="slide"><img width="1798" height="1100" decoding="async" data-src="images/118.webp" data-srcset="images/m/118.webp 800w, images/118.webp 1798w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.635)" alt="楽天 LUXURY BEAUTY — 縦型・スクエア展開"></figure>
+          <figure class="slide"><img width="2300" height="1100" decoding="async" data-src="images/125.webp" data-srcset="images/m/125.webp 800w, images/125.webp 2300w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.091)" alt="BANOBAGI × ニシコリ「真夏のスターライト」"></figure>
+          <figure class="slide"><img width="2138" height="1100" decoding="async" data-src="images/116.webp" data-srcset="images/m/116.webp 800w, images/116.webp 2138w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.944)" alt="ミツカン フルーティス / トップバリュ × リンネル"></figure>
+          <figure class="slide"><img width="1714" height="1100" decoding="async" data-src="images/115.webp" data-srcset="images/m/115.webp 800w, images/115.webp 1714w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.558)" alt="docomo ahamo — バナー"></figure>
+          <figure class="slide"><img width="2220" height="1100" decoding="async" data-src="images/117.webp" data-srcset="images/m/117.webp 800w, images/117.webp 2220w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.018)" alt="販促パネル"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
-        <div class="g-bar"><span class="g-count">01 / 04</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
+        <div class="g-bar"><span class="g-count">01 / 08</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="work" data-tone="paper" id="w16">
+    <a class="tab" href="#w16"><span>05</span><span class="t">TikTok Shop Intern</span><span class="m cat">Web / LP</span><span class="m">2026</span></a>
+    <div class="body">
+      <div>
+        <h3>TikTok Shop 学生インターン募集 LP</h3>
+        <p class="desc">TORIHADA × TikTok Shop の学生向け長期インターンを募集するランディングページ。「大学生のうちに、SNSで“売る力”を。」というメッセージを軸に、会社紹介、仕事の流れ、働く雰囲気、安心ポイント、応募条件、選考フロー、FAQまでを1ページに設計した。SPを主軸にしつつ、PCでは目次ナビゲーションと縦長コンテンツを並べたレイアウトに展開。写真・数字・ステップ表現でテンポよく情報を整理し、初めての人でも自分ごととして読み進められる構成にした。</p>
+        <div class="marquee" aria-hidden="true"><div>Web design · Landing page · Recruiting · SP / PC · TORIHADA · 2026 · Web design · Landing page · Recruiting · SP / PC · TORIHADA · 2026 · </div></div>
+      </div>
+      <div class="gallery">
+        <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
+          <figure class="slide"><img width="1917" height="1100" decoding="async" data-src="images/126.webp" data-srcset="images/m/126.webp 800w, images/126.webp 1917w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.743)" alt="学生インターン募集 LP — PC / SP"></figure>
+          <figure class="slide"><img width="1982" height="1100" decoding="async" data-src="images/127.webp" data-srcset="images/m/127.webp 800w, images/127.webp 1982w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.802)" alt="学生インターン募集 LP — SP画面"></figure>
+          <figure class="slide"><img width="1958" height="1100" decoding="async" data-src="images/128.webp" data-srcset="images/m/128.webp 800w, images/128.webp 1958w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.78)" alt="学生インターン募集 LP — SP全体構成"></figure>
+          <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
+        </div>
+        <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="work" data-tone="teal" id="w17">
+    <a class="tab" href="#w17"><span>06</span><span class="t">WONDER</span><span class="m cat">Key visual / Motion</span><span class="m">2026</span></a>
+    <div class="body">
+      <div>
+        <h3>社内テーマビジュアル「WONDER」</h3>
+        <p class="desc">TORIHADA社内で定期的に掲げるテーマのキービジュアル。テーマ「Aiming for Wonder」と、そこに込めた「感動を届ける」「驚きを作る」「ワクワク好奇心」という3つの想いを、テクノロジーと植物が絡み合いながら育っていく世界観で表現し、PC壁紙として展開した。さらにモーション版を制作。文字が虹色に揺らめき、3つのキーワードが順に灯り、光の粒やシャボン玉が舞い上がる映像で、静止画だけでは伝えきれない“ワクワク”を形にした。</p>
+        <div class="marquee" aria-hidden="true"><div>Key visual · Motion graphics · Multimedia · Poster · Wallpaper · Internal branding · 2026 · Key visual · Motion graphics · Multimedia · Poster · Wallpaper · Internal branding · 2026 · </div></div>
+      </div>
+      <div class="gallery">
+        <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
+          <figure class="slide slide-video slide-loop"><video width="1920" height="1080" poster="images/132.webp" muted loop playsinline preload="none" aria-label="WONDER キービジュアル（モーション）"><source media="(max-width: 860px)" src="wonder_v3_m.mp4" type="video/mp4"><source src="wonder_v3.mp4" type="video/mp4"></video></figure>
+          <figure class="slide slide-video slide-loop"><video width="1920" height="1080" poster="images/133.webp" muted loop playsinline preload="none" aria-label="Aiming for Wonder PC壁紙（モーション）"><source media="(max-width: 860px)" src="wonder_v2_m.mp4" type="video/mp4"><source src="wonder_v2.mp4" type="video/mp4"></video></figure>
+          <figure class="slide"><img width="2496" height="1100" decoding="async" data-src="images/130.webp" data-srcset="images/m/130.webp 800w, images/130.webp 2496w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 2.269)" alt="WONDER — PC壁紙（2種）"></figure>
+          <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
+        </div>
+        <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
     </div>
   </article>
 
   <article class="work" data-tone="paper" id="w5">
-    <a class="tab" href="#w5"><span>05</span><span class="t">Donkey Kong Country</span><span class="m cat">Graphic design</span><span class="m">2024</span></a>
+    <a class="tab" href="#w5"><span>07</span><span class="t">Donkey Kong Country</span><span class="m cat">Graphic design</span><span class="m">2024</span></a>
     <div class="body">
       <div>
         <h3>Donkey Kong Country 駅貼り広告</h3>
@@ -677,13 +777,13 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/016.webp" srcset="images/m/016.webp 800w, images/016.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/017.webp" srcset="images/m/017.webp 800w, images/017.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/018.webp" srcset="images/m/018.webp 800w, images/018.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/019.webp" srcset="images/m/019.webp 800w, images/019.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/020.webp" srcset="images/m/020.webp 800w, images/020.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/021.webp" srcset="images/m/021.webp 800w, images/021.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/022.webp" srcset="images/m/022.webp 800w, images/022.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Donkey Kong Country 駅貼り広告 — 7"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/016.webp" data-srcset="images/m/016.webp 800w, images/016.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/017.webp" data-srcset="images/m/017.webp 800w, images/017.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/018.webp" data-srcset="images/m/018.webp 800w, images/018.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/019.webp" data-srcset="images/m/019.webp 800w, images/019.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/020.webp" data-srcset="images/m/020.webp 800w, images/020.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/021.webp" data-srcset="images/m/021.webp 800w, images/021.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 6"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/022.webp" data-srcset="images/m/022.webp 800w, images/022.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Donkey Kong Country 駅貼り広告 — 7"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -692,7 +792,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="teal" id="w6">
-    <a class="tab" href="#w6"><span>06</span><span class="t">Monster Energy</span><span class="m cat">Art direction</span><span class="m">2024〜25</span></a>
+    <a class="tab" href="#w6"><span>08</span><span class="t">Monster Energy</span><span class="m cat">Art direction</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
         <h3>Monster Energy 年間キャンペーン</h3>
@@ -701,11 +801,11 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/023.webp" srcset="images/m/023.webp 800w, images/023.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/024.webp" srcset="images/m/024.webp 800w, images/024.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/025.webp" srcset="images/m/025.webp 800w, images/025.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/026.webp" srcset="images/m/026.webp 800w, images/026.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/027.webp" srcset="images/m/027.webp 800w, images/027.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Monster Energy 年間キャンペーン — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/023.webp" data-srcset="images/m/023.webp 800w, images/023.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Monster Energy 年間キャンペーン — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/024.webp" data-srcset="images/m/024.webp 800w, images/024.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Monster Energy 年間キャンペーン — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/025.webp" data-srcset="images/m/025.webp 800w, images/025.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Monster Energy 年間キャンペーン — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/026.webp" data-srcset="images/m/026.webp 800w, images/026.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Monster Energy 年間キャンペーン — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/027.webp" data-srcset="images/m/027.webp 800w, images/027.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Monster Energy 年間キャンペーン — 5"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 05</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -714,7 +814,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="mist" id="w7">
-    <a class="tab" href="#w7"><span>07</span><span class="t">WELLCNE &amp; FAROme</span><span class="m cat">Exhibition</span><span class="m">2024〜25</span></a>
+    <a class="tab" href="#w7"><span>09</span><span class="t">WELLCNE &amp; FAROme</span><span class="m cat">Exhibition</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
         <h3>WELLCNE &amp; FAROme 展示会</h3>
@@ -723,12 +823,12 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/028.webp" srcset="images/m/028.webp 800w, images/028.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/029.webp" srcset="images/m/029.webp 800w, images/029.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/030.webp" srcset="images/m/030.webp 800w, images/030.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/031.webp" srcset="images/m/031.webp 800w, images/031.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/032.webp" srcset="images/m/032.webp 800w, images/032.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/033.webp" srcset="images/m/033.webp 800w, images/033.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="WELLCNE &amp; FAROme 展示会 — 6"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/028.webp" data-srcset="images/m/028.webp 800w, images/028.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="WELLCNE &amp; FAROme 展示会 — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/029.webp" data-srcset="images/m/029.webp 800w, images/029.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="WELLCNE &amp; FAROme 展示会 — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/030.webp" data-srcset="images/m/030.webp 800w, images/030.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="WELLCNE &amp; FAROme 展示会 — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/031.webp" data-srcset="images/m/031.webp 800w, images/031.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="WELLCNE &amp; FAROme 展示会 — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/032.webp" data-srcset="images/m/032.webp 800w, images/032.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="WELLCNE &amp; FAROme 展示会 — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/033.webp" data-srcset="images/m/033.webp 800w, images/033.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="WELLCNE &amp; FAROme 展示会 — 6"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -737,7 +837,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="ink" id="w8">
-    <a class="tab" href="#w8"><span>08</span><span class="t">P&amp;G</span><span class="m cat">Event graphics</span><span class="m">2024〜25</span></a>
+    <a class="tab" href="#w8"><span>10</span><span class="t">P&amp;G</span><span class="m cat">Event graphics</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
         <h3>P&amp;G EXPO パネル・ポスター</h3>
@@ -746,11 +846,11 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/034.webp" srcset="images/m/034.webp 800w, images/034.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/035.webp" srcset="images/m/035.webp 800w, images/035.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/036.webp" srcset="images/m/036.webp 800w, images/036.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/037.webp" srcset="images/m/037.webp 800w, images/037.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/038.webp" srcset="images/m/038.webp 800w, images/038.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="P&amp;G EXPO パネル・ポスター — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/034.webp" data-srcset="images/m/034.webp 800w, images/034.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="P&amp;G EXPO パネル・ポスター — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/035.webp" data-srcset="images/m/035.webp 800w, images/035.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="P&amp;G EXPO パネル・ポスター — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/036.webp" data-srcset="images/m/036.webp 800w, images/036.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="P&amp;G EXPO パネル・ポスター — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/037.webp" data-srcset="images/m/037.webp 800w, images/037.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="P&amp;G EXPO パネル・ポスター — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/038.webp" data-srcset="images/m/038.webp 800w, images/038.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="P&amp;G EXPO パネル・ポスター — 5"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 05</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -759,7 +859,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="paper" id="w9">
-    <a class="tab" href="#w9"><span>09</span><span class="t">DAMA collection</span><span class="m cat">Editorial</span><span class="m">2024〜25</span></a>
+    <a class="tab" href="#w9"><span>11</span><span class="t">DAMA collection</span><span class="m cat">Editorial</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
         <h3>DAMA collection 年間誌面制作</h3>
@@ -768,15 +868,15 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/039.webp" srcset="images/m/039.webp 800w, images/039.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/040.webp" srcset="images/m/040.webp 800w, images/040.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/041.webp" srcset="images/m/041.webp 800w, images/041.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/042.webp" srcset="images/m/042.webp 800w, images/042.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/043.webp" srcset="images/m/043.webp 800w, images/043.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/044.webp" srcset="images/m/044.webp 800w, images/044.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/045.webp" srcset="images/m/045.webp 800w, images/045.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 7"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/046.webp" srcset="images/m/046.webp 800w, images/046.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 8"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/047.webp" srcset="images/m/047.webp 800w, images/047.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="DAMA collection 年間誌面制作 — 9"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/039.webp" data-srcset="images/m/039.webp 800w, images/039.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/040.webp" data-srcset="images/m/040.webp 800w, images/040.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/041.webp" data-srcset="images/m/041.webp 800w, images/041.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/042.webp" data-srcset="images/m/042.webp 800w, images/042.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/043.webp" data-srcset="images/m/043.webp 800w, images/043.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/044.webp" data-srcset="images/m/044.webp 800w, images/044.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 6"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/045.webp" data-srcset="images/m/045.webp 800w, images/045.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 7"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/046.webp" data-srcset="images/m/046.webp 800w, images/046.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 8"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/047.webp" data-srcset="images/m/047.webp 800w, images/047.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="DAMA collection 年間誌面制作 — 9"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 09</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -785,7 +885,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="teal" id="w10">
-    <a class="tab" href="#w10"><span>10</span><span class="t">Co Point</span><span class="m cat">UI/UX design</span><span class="m">2023</span></a>
+    <a class="tab" href="#w10"><span>12</span><span class="t">Co Point</span><span class="m cat">UI/UX design</span><span class="m">2023</span></a>
     <div class="body">
       <div>
         <h3>Co Point</h3>
@@ -794,17 +894,17 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/048.webp" srcset="images/m/048.webp 800w, images/048.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/049.webp" srcset="images/m/049.webp 800w, images/049.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/050.webp" srcset="images/m/050.webp 800w, images/050.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/051.webp" srcset="images/m/051.webp 800w, images/051.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/052.webp" srcset="images/m/052.webp 800w, images/052.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/053.webp" srcset="images/m/053.webp 800w, images/053.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/054.webp" srcset="images/m/054.webp 800w, images/054.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 7"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/055.webp" srcset="images/m/055.webp 800w, images/055.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 8"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/056.webp" srcset="images/m/056.webp 800w, images/056.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 9"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/057.webp" srcset="images/m/057.webp 800w, images/057.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 10"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/058.webp" srcset="images/m/058.webp 800w, images/058.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Co Point — 11"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/048.webp" data-srcset="images/m/048.webp 800w, images/048.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/049.webp" data-srcset="images/m/049.webp 800w, images/049.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/050.webp" data-srcset="images/m/050.webp 800w, images/050.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/051.webp" data-srcset="images/m/051.webp 800w, images/051.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/052.webp" data-srcset="images/m/052.webp 800w, images/052.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/053.webp" data-srcset="images/m/053.webp 800w, images/053.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 6"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/054.webp" data-srcset="images/m/054.webp 800w, images/054.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 7"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/055.webp" data-srcset="images/m/055.webp 800w, images/055.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 8"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/056.webp" data-srcset="images/m/056.webp 800w, images/056.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 9"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/057.webp" data-srcset="images/m/057.webp 800w, images/057.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 10"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/058.webp" data-srcset="images/m/058.webp 800w, images/058.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Co Point — 11"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 11</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -813,7 +913,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="mist" id="w11">
-    <a class="tab" href="#w11"><span>11</span><span class="t">ぼくら 夜行性動物</span><span class="m cat">Branding</span><span class="m">2021〜23</span></a>
+    <a class="tab" href="#w11"><span>13</span><span class="t">ぼくら 夜行性動物</span><span class="m cat">Branding</span><span class="m">2021〜23</span></a>
     <div class="body">
       <div>
         <h3>ぼくら 夜行性動物</h3>
@@ -822,13 +922,13 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/059.webp" srcset="images/m/059.webp 800w, images/059.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/060.webp" srcset="images/m/060.webp 800w, images/060.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/061.webp" srcset="images/m/061.webp 800w, images/061.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/062.webp" srcset="images/m/062.webp 800w, images/062.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/063.webp" srcset="images/m/063.webp 800w, images/063.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/064.webp" srcset="images/m/064.webp 800w, images/064.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 6"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/065.webp" srcset="images/m/065.webp 800w, images/065.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="ぼくら 夜行性動物 — 7"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/059.webp" data-srcset="images/m/059.webp 800w, images/059.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/060.webp" data-srcset="images/m/060.webp 800w, images/060.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/061.webp" data-srcset="images/m/061.webp 800w, images/061.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/062.webp" data-srcset="images/m/062.webp 800w, images/062.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/063.webp" data-srcset="images/m/063.webp 800w, images/063.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/064.webp" data-srcset="images/m/064.webp 800w, images/064.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 6"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/065.webp" data-srcset="images/m/065.webp 800w, images/065.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="ぼくら 夜行性動物 — 7"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -837,7 +937,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="ink" id="w12">
-    <a class="tab" href="#w12"><span>12</span><span class="t">Perrier</span><span class="m cat">Graphic design</span><span class="m">2017</span></a>
+    <a class="tab" href="#w12"><span>14</span><span class="t">Perrier</span><span class="m cat">Graphic design</span><span class="m">2017</span></a>
     <div class="body">
       <div>
         <h3>Perrier &amp; S.Pellegrino</h3>
@@ -846,9 +946,9 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/066.webp" srcset="images/m/066.webp 800w, images/066.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Perrier &amp; S.Pellegrino — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/067.webp" srcset="images/m/067.webp 800w, images/067.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Perrier &amp; S.Pellegrino — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/068.webp" srcset="images/m/068.webp 800w, images/068.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="Perrier &amp; S.Pellegrino — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/066.webp" data-srcset="images/m/066.webp 800w, images/066.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Perrier &amp; S.Pellegrino — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/067.webp" data-srcset="images/m/067.webp 800w, images/067.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Perrier &amp; S.Pellegrino — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/068.webp" data-srcset="images/m/068.webp 800w, images/068.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="Perrier &amp; S.Pellegrino — 3"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -857,7 +957,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="paper" id="w13">
-    <a class="tab" href="#w13"><span>13</span><span class="t">TOAmart</span><span class="m cat">Packaging</span><span class="m">2022〜23</span></a>
+    <a class="tab" href="#w13"><span>15</span><span class="t">TOAmart</span><span class="m cat">Packaging</span><span class="m">2022〜23</span></a>
     <div class="body">
       <div>
         <h3>TOAmart パッケージデザイン</h3>
@@ -866,12 +966,12 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/069.webp" srcset="images/m/069.webp 800w, images/069.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/070.webp" srcset="images/m/070.webp 800w, images/070.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/071.webp" srcset="images/m/071.webp 800w, images/071.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 3"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/072.webp" srcset="images/m/072.webp 800w, images/072.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 4"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/073.webp" srcset="images/m/073.webp 800w, images/073.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 5"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/074.webp" srcset="images/m/074.webp 800w, images/074.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="TOAmart パッケージデザイン — 6"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/069.webp" data-srcset="images/m/069.webp 800w, images/069.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="TOAmart パッケージデザイン — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/070.webp" data-srcset="images/m/070.webp 800w, images/070.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="TOAmart パッケージデザイン — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/071.webp" data-srcset="images/m/071.webp 800w, images/071.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="TOAmart パッケージデザイン — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/072.webp" data-srcset="images/m/072.webp 800w, images/072.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="TOAmart パッケージデザイン — 4"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/073.webp" data-srcset="images/m/073.webp 800w, images/073.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="TOAmart パッケージデザイン — 5"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/074.webp" data-srcset="images/m/074.webp 800w, images/074.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="TOAmart パッケージデザイン — 6"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -880,7 +980,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="teal" id="w14">
-    <a class="tab" href="#w14"><span>14</span><span class="t">42SF 企画展</span><span class="m cat">Illustration</span><span class="m">2021</span></a>
+    <a class="tab" href="#w14"><span>16</span><span class="t">42SF 企画展</span><span class="m cat">Illustration</span><span class="m">2021</span></a>
     <div class="body">
       <div>
         <h3>42SF 企画展</h3>
@@ -889,9 +989,9 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/075.webp" srcset="images/m/075.webp 800w, images/075.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="42SF 企画展 — 1"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/076.webp" srcset="images/m/076.webp 800w, images/076.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="42SF 企画展 — 2"></figure>
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/077.webp" srcset="images/m/077.webp 800w, images/077.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="42SF 企画展 — 3"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/075.webp" data-srcset="images/m/075.webp 800w, images/075.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="42SF 企画展 — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/076.webp" data-srcset="images/m/076.webp 800w, images/076.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="42SF 企画展 — 2"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/077.webp" data-srcset="images/m/077.webp 800w, images/077.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="42SF 企画展 — 3"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -900,7 +1000,7 @@ html,body{overflow-x:clip; max-width:100%}
   </article>
 
   <article class="work" data-tone="mist" id="w15">
-    <a class="tab" href="#w15"><span>15</span><span class="t">じっとり</span><span class="m cat">Photography</span><span class="m">2021</span></a>
+    <a class="tab" href="#w15"><span>17</span><span class="t">じっとり</span><span class="m cat">Photography</span><span class="m">2021</span></a>
     <div class="body">
       <div>
         <h3>じっとり</h3>
@@ -909,7 +1009,7 @@ html,body{overflow-x:clip; max-width:100%}
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
-          <figure class="slide"><img loading="lazy" decoding="async" src="images/078.webp" srcset="images/m/078.webp 800w, images/078.webp 1100w" sizes="(max-width: 860px) 92vw, 62vw" alt="じっとり — 1"></figure>
+          <figure class="slide"><img width="1100" height="619" decoding="async" data-src="images/078.webp" data-srcset="images/m/078.webp 800w, images/078.webp 1100w" sizes="(max-width: 860px) 400px, calc(min(46vh, 540px) * 1.777)" alt="じっとり — 1"></figure>
           <!-- 在这里继续添加图片：<figure class="slide"><img src="..." alt="..."></figure> -->
         </div>
         <div class="g-bar"><span class="g-count">01 / 01</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
@@ -946,20 +1046,22 @@ html,body{overflow-x:clip; max-width:100%}
   const DISC = [
     {name:'AIツール', en:'WHALE & PANDA', full:'AI product brands', hex:'2026', c:'#2bb5a8', to:'#w1', no:'01', gl:'#2bb5a8'},
     {name:'キャンペーン', en:'Yahoo! JAPAN', full:'key visuals & banners', hex:'2026', c:'#f3c6dc', to:'#w2', no:'02', gl:'#8fb4ff'},
-    {name:'バナー・グッズ', en:'FANME', full:'banners & goods', hex:'2025〜26', c:'#e6e0f6', to:'#w3', no:'03', gl:'#b49cff'},
+    {name:'イベント・グッズ', en:'FANME', full:'event pages, banners & goods', hex:'2025〜26', c:'#e6e0f6', to:'#w3', no:'03', gl:'#b49cff'},
     {name:'クライアント', en:'Client Works', full:'advertising visuals', hex:'2025〜26', c:'#dfe6ea', to:'#w4', no:'04', gl:'#26b7bc'},
-    {name:'駅貼り広告', en:'Donkey Kong Country', full:'key visuals', hex:'2024', c:'#f5f8f7', to:'#w5', no:'05', gl:'#f2c94c'},
-    {name:'年間KV', en:'Monster Energy', full:'campaign art direction', hex:'2024〜25', c:'#dceff0', to:'#w6', no:'06', gl:'#9be33a'},
-    {name:'展示会', en:'WELLCNE & FAROme', full:'exhibition graphics', hex:'2024〜25', c:'#a9e2e4', to:'#w7', no:'07', gl:'#2cc6c0'},
-    {name:'EXPOパネル', en:'P&G', full:'event panels', hex:'2024〜25', c:'#7fd3d6', to:'#w8', no:'08', gl:'#2f6bff'},
-    {name:'誌面デザイン', en:'DAMA collection', full:'editorial layouts', hex:'2024〜25', c:'#4fc6ca', to:'#w9', no:'09', gl:'#5fa8d8'},
-    {name:'アプリ設計', en:'Co Point', full:'UI/UX design', hex:'2023', c:'#26b7bc', to:'#w10', no:'10', gl:'#ff9a2e'},
-    {name:'ブランド', en:'Bokura', full:'brand identities', hex:'2021〜23', c:'#1e8e92', to:'#w11', no:'11', gl:'#c6f24a'},
-    {name:'ビジュアル', en:'Perrier', full:'product visuals', hex:'2017', c:'#0e5e61', to:'#w12', no:'12', gl:'#1fbf6a'},
-    {name:'パッケージ', en:'TOAmart', full:'packaging', hex:'2022〜23', c:'#16393b', to:'#w13', no:'13', gl:'#8b7bff'},
-    {name:'企画展', en:'42SF', full:'illustrations', hex:'2021', c:'#2b2f30', to:'#w14', no:'14', gl:'#c9d2dc'}
+    {name:'LP', en:'TikTok Shop Intern', full:'landing page', hex:'2026', c:'#1f4fd8', to:'#w16', no:'05', gl:'#5b8cff'},
+    {name:'テーマビジュアル', en:'WONDER', full:'key visual & motion', hex:'2026', c:'#b9a3e8', to:'#w17', no:'06', gl:'#f2a7d8'},
+    {name:'駅貼り広告', en:'Donkey Kong Country', full:'key visuals', hex:'2024', c:'#f5f8f7', to:'#w5', no:'07', gl:'#f2c94c'},
+    {name:'年間KV', en:'Monster Energy', full:'campaign art direction', hex:'2024〜25', c:'#dceff0', to:'#w6', no:'08', gl:'#9be33a'},
+    {name:'展示会', en:'WELLCNE & FAROme', full:'exhibition graphics', hex:'2024〜25', c:'#a9e2e4', to:'#w7', no:'09', gl:'#2cc6c0'},
+    {name:'EXPOパネル', en:'P&G', full:'event panels', hex:'2024〜25', c:'#7fd3d6', to:'#w8', no:'10', gl:'#2f6bff'},
+    {name:'誌面デザイン', en:'DAMA collection', full:'editorial layouts', hex:'2024〜25', c:'#4fc6ca', to:'#w9', no:'11', gl:'#5fa8d8'},
+    {name:'アプリ設計', en:'Co Point', full:'UI/UX design', hex:'2023', c:'#26b7bc', to:'#w10', no:'12', gl:'#ff9a2e'},
+    {name:'ブランド', en:'Bokura', full:'brand identities', hex:'2021〜23', c:'#1e8e92', to:'#w11', no:'13', gl:'#c6f24a'},
+    {name:'ビジュアル', en:'Perrier', full:'product visuals', hex:'2017', c:'#0e5e61', to:'#w12', no:'14', gl:'#1fbf6a'},
+    {name:'パッケージ', en:'TOAmart', full:'packaging', hex:'2022〜23', c:'#16393b', to:'#w13', no:'15', gl:'#8b7bff'},
+    {name:'企画展', en:'42SF', full:'illustrations', hex:'2021', c:'#2b2f30', to:'#w14', no:'16', gl:'#c9d2dc'}
   ];
-  const COVERS=['images/079.webp','images/104.webp','images/105.webp','images/106.webp','images/083.webp','images/084.webp','images/085.webp','images/086.webp','images/087.webp','images/088.webp','images/089.webp','images/090.webp','images/091.webp','images/092.webp'];
+  const COVERS=['images/079.webp','images/104.webp','images/105.webp','images/106.webp','images/129.webp','images/131.webp','images/083.webp','images/084.webp','images/085.webp','images/086.webp','images/087.webp','images/088.webp','images/089.webp','images/090.webp','images/091.webp','images/092.webp'];
   DISC.forEach((d,i)=>{ d.img = COVERS[i] || ''; });
 
   /* intro: kinetic type — name decodes, disciplines flash, "Portfolio" rises and the camera dives into the o */
@@ -1290,49 +1392,9 @@ html,body{overflow-x:clip; max-width:100%}
   new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) wm.classList.add('in'); }),{threshold:.4}).observe(wm);
 
 
-  /* custom cursor: a dot that leaves a trail of liquid light */
+  /* cursor: a plain dot that follows the pointer exactly */
   const cur = document.getElementById('cursor');
-  const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-  let cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy, seen=false;
-  addEventListener('pointermove',e=>{ tx=e.clientX; ty=e.clientY; if(!seen){ cx=tx; cy=ty; seen=true; } },{passive:true});
-  const fx = document.createElement('canvas'); fx.className='fx'; fx.setAttribute('aria-hidden','true'); document.body.appendChild(fx);
-  const fxc = fx.getContext('2d');
-  function fitFx(){ const d=Math.min(2,devicePixelRatio||1); fx.width=innerWidth*d; fx.height=innerHeight*d; fxc.setTransform(d,0,0,d,0,0); }
-  fitFx(); addEventListener('resize',fitFx);
-  const pts=[], LIFE=700;
-  (function cl(now){
-    now = now || performance.now();
-    cx+=(tx-cx)*(reduce?1:.35); cy+=(ty-cy)*(reduce?1:.35);
-    cur.style.transform='translate('+cx+'px,'+cy+'px)';
-    if(fine && !reduce){
-      const last = pts[pts.length-1];
-      if(seen && (!last || Math.hypot(cx-last.x, cy-last.y) > 38)) pts.push({x:cx, y:cy, t:now});
-      while(pts.length && now-pts[0].t > LIFE) pts.shift();
-      if(!pts.length && !fx._dirty){ requestAnimationFrame(cl); return; }
-      fx._dirty = pts.length > 0;
-      fxc.clearRect(0,0,innerWidth,innerHeight);
-      fxc.lineCap='butt'; fxc.lineJoin='miter'; fxc.lineWidth=1;
-      const n = pts.length;
-      for(let i=1;i<n;i++){
-        const a=pts[i-1], b=pts[i];
-        const life = 1-(now-a.t)/LIFE; if(life<=0) continue;
-        fxc.strokeStyle='rgba(255,255,255,'+(life*.8)+')';
-        fxc.beginPath(); fxc.moveTo(a.x,a.y); fxc.lineTo(b.x,b.y); fxc.stroke();
-      }
-      if(n){
-        const a=pts[n-1];
-        fxc.strokeStyle='rgba(255,255,255,.85)';
-        fxc.beginPath(); fxc.moveTo(a.x,a.y); fxc.lineTo(cx,cy); fxc.stroke();
-      }
-      for(let i=0;i<n;i++){
-        const p=pts[i], life=1-(now-p.t)/LIFE; if(life<=0) continue;
-        const sz=3+4*(1-life);
-        fxc.strokeStyle='rgba(255,255,255,'+(life*.9)+')';
-        fxc.strokeRect(Math.round(p.x-sz/2)+.5, Math.round(p.y-sz/2)+.5, Math.round(sz), Math.round(sz));
-      }
-    }
-    requestAnimationFrame(cl);
-  })();
+  addEventListener('pointermove',e=>{ cur.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'; },{passive:true});
   /* galleries: drag, buttons, counter, progress */
   document.querySelectorAll('.gallery').forEach(g=>{
     const tr = g.querySelector('.g-track'), slides = [...tr.querySelectorAll('.slide')];
@@ -1355,8 +1417,6 @@ html,body{overflow-x:clip; max-width:100%}
     tr.addEventListener('pointerup',end); tr.addEventListener('pointercancel',end);
     tr.addEventListener('click',e=>{ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } },true);
     tr.addEventListener('dragstart',e=>e.preventDefault());
-    tr.addEventListener('pointerenter',()=>{ cur.classList.add('big-c'); cur.textContent='Drag'; });
-    tr.addEventListener('pointerleave',()=>{ cur.classList.remove('big-c'); cur.textContent=''; });
   });
 
   /* Portfolio: variable-weight proximity + idle wave */
@@ -1620,53 +1680,27 @@ html,body{overflow-x:clip; max-width:100%}
 
 
 
-  /* about: anticipation → half-flip to the portrait → the card gathers into a circle (a ring pulses out) → the circle opens to fill the column → details settle */
+  /* about: the portrait opens out of the card in one smooth move (plays once) */
   (function(){
     const mc = document.querySelector('.me-card'); if(!mc) return;
     const col = mc.parentElement, full = col.querySelector('.me-full'); if(!full) return;
-    const ring = document.createElement('span'); ring.className = 'mf-ring'; ring.setAttribute('aria-hidden','true'); col.appendChild(ring);
+    const img = full.querySelector('img');
     const prop = (k,v)=>full.style.setProperty(k,v);
     const clip = (t,r,b,l,rad)=>{ prop('--ct',t+'px'); prop('--cr',r+'px'); prop('--cb',b+'px'); prop('--cl',l+'px'); prop('--crad',rad+'px'); };
-    const STEPS = ['show','flipin','morph','circ','grow','expand','tinted'];
-    let state = 'idle', timers = [];
-    const later = (fn, ms)=>timers.push(setTimeout(fn, ms));
-    const raf2 = fn=>requestAnimationFrame(()=>requestAnimationFrame(fn));
-    function geom(){
+    let started = false;
+    function finalState(){ full.classList.add('show','reveal','expand'); clip(0,0,0,0,0); mc.style.visibility='hidden'; }
+    async function play(){
+      if(started) return; started = true;
+      try{ if(img.decode) await img.decode(); }catch(_){}           /* decode first so the move never stutters */
       const c = col.getBoundingClientRect(), r = mc.getBoundingClientRect();
-      const cx = r.left-c.left+r.width/2, cy = r.top-c.top+r.height/2;
-      return { W:c.width, H:c.height, t:r.top-c.top, r:c.right-r.right, b:c.bottom-r.bottom, l:r.left-c.left, cx, cy,
-               d: Math.min(r.width, r.height)*.66, R: Math.hypot(Math.max(cx, c.width-cx), Math.max(cy, c.height-cy)) + 4 };
+      clip(r.top-c.top, c.right-r.right, c.bottom-r.bottom, r.left-c.left, 14);
+      full.classList.add('show');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        mc.style.visibility='hidden';
+        full.classList.add('reveal','expand'); clip(0,0,0,0,0);
+      }));
     }
-    function finalState(){ full.classList.add('show','grow','expand'); clip(0,0,0,0,0); prop('--ry','0deg'); mc.classList.add('gone'); mc.style.visibility = 'hidden'; state = 'shown'; }
-    function resetCard(){
-      timers.forEach(clearTimeout); timers = [];
-      full.classList.remove(...STEPS); ring.classList.remove('go');
-      mc.classList.remove('flipout','gone'); mc.style.visibility = '';
-      clip(0,0,0,0,0); prop('--ry','0deg'); state = 'idle';
-    }
-    function play(){
-      if(state !== 'idle') return; state = 'playing';
-      const g = geom();
-      void mc.offsetWidth; mc.classList.add('flipout');                                       /* 0–560: lean back, turn edge-on */
-      later(()=>{
-        clip(g.t, g.r, g.b, g.l, 16); prop('--ox', g.cx+'px'); prop('--oy', g.cy+'px'); prop('--ry','-90deg');
-        full.classList.add('show'); mc.classList.add('gone'); mc.style.visibility = 'hidden';
-        raf2(()=>{ full.classList.add('flipin'); prop('--ry','0deg'); });                     /* 560–960: portrait lands face-on in the card's shape */
-      }, 560);
-      later(()=>{
-        full.classList.add('morph');                                                             /* 1000–1500: the card gathers into a rounded square */
-        clip(g.cy-g.d/2, g.W-(g.cx+g.d/2), g.H-(g.cy+g.d/2), g.cx-g.d/2, 18);   /* shrinks in place into a small rounded square */
-      }, 1000);
-      later(()=>{ full.classList.remove('morph','flipin'); full.classList.add('grow'); clip(0,0,0,0,0); }, 1600);   /* 1600–2500: the square opens out to fill the column */
-      later(()=>{ full.classList.add('expand'); }, 2250);                                       /* details settle in */
-      later(()=>{ state = 'shown'; }, 2800);
-    }
-    if(reduce){ finalState(); }
-    else new IntersectionObserver(es=>{
-      const e = es[0];
-      if(e.intersectionRatio === 0 && state !== 'idle') resetCard();
-      else if(e.intersectionRatio >= .45) play();
-    }, {threshold:[0,.45]}).observe(col);
+    finalState();   /* static portrait: shown as-is, no card animation */
     const nm = document.getElementById('mfName'), def = nm.textContent, pal = full.querySelector('.mf-pal');
     pal.querySelectorAll('button').forEach(btn=>{
       const c = btn.style.getPropertyValue('--c').trim();
@@ -1678,6 +1712,14 @@ html,body{overflow-x:clip; max-width:100%}
     pal.addEventListener('focusout', e=>{ if(!pal.contains(e.relatedTarget)) reset(); });
   })();
 
+
+  /* gallery images load only when their project panel is about to come into view (keeps first load light) */
+  (function(){
+    const load = w => w.querySelectorAll('img[data-src]').forEach((im,i)=>{ if(i>1) im.loading='lazy'; if(im.dataset.srcset) im.srcset = im.dataset.srcset; im.src = im.dataset.src; im.removeAttribute('data-src'); im.removeAttribute('data-srcset'); });
+    if(!('IntersectionObserver' in window)){ document.querySelectorAll('.work').forEach(load); return; }
+    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ load(e.target); io.unobserve(e.target); } }), {rootMargin:'0px 0px 900px 0px'});
+    document.querySelectorAll('.work').forEach(w=>io.observe(w));
+  })();
   /* project videos: play only while on screen */
   document.querySelectorAll('.slide-video video').forEach(v=>{
     if(reduce) return;
