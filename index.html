@@ -6,7 +6,7 @@
 <title>Wang Qian — Visual works</title>
 <meta name="description" content="Wang Qian — Tokyo-based visual designer. Branding, advertising, digital media and UI/UX.">
 <meta property="og:title" content="Wang Qian — Visual works">
-<meta property="og:description" content="東京を拠点に、ブランディング、広告、デジタルメディア、UI/UXを中心に幅広いデザインに取り組む。">
+<meta property="og:description" content="ユーザーとビジネスの課題を起点に、企画・情報設計・UI・ビジュアルまでを一貫して手がけるデザイナー。">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
 
@@ -532,6 +532,21 @@ html,body{overflow-x:clip; max-width:100%}
 .slide-loop video{pointer-events:none}
 /* a panel fully covered by the next one is not drawn at all: fewer stacked layers, no stale/torn strips */
 .work.buried{visibility:hidden}
+
+/* case study (PdM view): a full-width row under the gallery — context / problem / role / approach / outcome */
+.work .body > .cs{grid-column:1 / -1; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:0 clamp(16px,2.2vw,32px); margin:clamp(4px,1vh,10px) 0 0; border-top:1px solid color-mix(in srgb,currentColor 18%,transparent); padding-top:clamp(14px,2vh,20px)}
+.cs > div{min-width:0}
+.cs dt{font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; line-height:1.5; opacity:.6; margin-bottom:8px}
+.cs dt span{letter-spacing:.04em; text-transform:none; margin-left:.6em}
+.cs dd{margin:0; font-size:13.5px; line-height:1.75}
+.work .body > .cs:has(> div:only-child){grid-template-columns:minmax(0,46em)}
+.idx-note{margin:18px 0 0; font-size:14px; letter-spacing:.02em; color:#9b9b99}
+@media (max-width:1100px){ .work .body > .cs{grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 24px} }
+@media (max-width:860px){ .work .body > .cs{grid-template-columns:1fr; gap:14px} }
+/* lighter panel shadows = less work for the GPU while scrolling */
+.work{box-shadow:0 -1px 0 rgba(255,255,255,.08), 0 -18px 36px -24px rgba(0,0,0,.7) !important}
+/* cover thumbnails: a style change once each image arrives makes Safari repaint it inside the 3D fan */
+.strip .chip.ld{outline:0 solid transparent}
 </style>
 </head>
 <body>
@@ -597,12 +612,12 @@ html,body{overflow-x:clip; max-width:100%}
           <button type="button" id="nextWord" aria-label="Next discipline">›</button>
         </div>
       </div>
-      <div class="row"><p class="bio">東京を拠点に、ブランディング、広告、デジタルメディア、UI/UXを中心に、幅広いデザインに取り組む。クリエイティブな発想と視覚表現、ユーザー体験を大切にしながら、AIをはじめとする新しい技術も取り入れ、デザインの可能性を探求している。</p></div>
+      <div class="row"><p class="bio">東京を拠点に活動するデザイナー。ユーザーとビジネスの課題を起点に、企画・情報設計・UI・ビジュアルまでを一貫して手がける。SNSキャンペーン、Webサービス、自社SaaSなど、デザインを“成果につながる仕組み”として設計し、プロダクトづくりの上流へと領域を広げている。AIをはじめとする新しい技術も積極的に取り入れている。</p></div>
       <div class="row cv">
         <section><h4>Experience<span>04</span></h4><ol><li><time>2025〜現在</time><p class="org">株式会社TORIHADA</p><p class="role">グラフィック / UI</p></li><li><time>2024〜2025</time><p class="org">株式会社FACE</p><p class="role">ブランド / UI</p></li><li><time>2022〜2023</time><p class="org">株式会社東亜産業</p><p class="role">ビジュアル全般</p></li><li><time>2017</time><p class="org">ネスレ（上海）</p><p class="role">ブランド / パッケージ</p></li></ol></section>
         <section><h4>Education<span>01</span></h4><ol><li><time>2020〜2022</time><p class="org">多摩美術大学</p><p class="role">グラフィックデザイン専攻</p></li></ol></section>
       </div>
-      <div class="row facts"><span>Branding · Advertising · Digital media · UI/UX</span><span>中国語 · 日本語 JLPT N1 · English</span><span>Illustrator · Photoshop · Figma · Claude · Codex</span></div>
+      <div class="row facts"><span>Problem framing · UX / UI · Branding · Campaign</span><span>中国語 · 日本語 JLPT N1 · English</span><span>Illustrator · Photoshop · Figma · Claude · Codex</span></div>
     </div>
   </div>
 </section>
@@ -610,6 +625,7 @@ html,body{overflow-x:clip; max-width:100%}
 <section class="works" id="works" aria-labelledby="worksTitle">
   <div class="works-head">
     <h2 id="worksTitle" class="big-t">Works<sup>17</sup></h2>
+    <p class="idx-note">Case studies — 背景・課題・役割・打ち手・成果</p>
     <ol class="idx">
       <li><a href="#w1"><span>AIツール</span><small>WHALE &amp; PANDA</small></a></li>
       <li><a href="#w2"><span>キャンペーン</span><small>Yahoo! JAPAN</small></a></li>
@@ -636,8 +652,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>WHALE &amp; PANDA</h3>
-        <p class="desc">TORIHADA AI TOOLS から生まれた2つのSaaS。TikTok Shop の実質利益や売れ筋、施策の効果を可視化するデータ分析ツール「WHALE」と、商品の縦型広告動画を半自動で生成・管理する「PANDA」。チームで開発し、私はロゴや機能紹介ビジュアル、展示会パネル、名刺、広告動画などのビジュアル全般と、Webサイトの一部デザインを担当した。</p>
-        <div class="marquee" aria-hidden="true"><div>Brand identity · Key visual · Web design · Exhibition · Motion · TORIHADA AI TOOLS · 2026 · Brand identity · Key visual · Web design · Exhibition · Motion · TORIHADA AI TOOLS · 2026 · </div></div>
+        
         <p class="links-p"><a href="https://whale.kawaii-ai.net/" target="_blank" rel="noopener">whale.kawaii-ai.net ↗</a><a href="https://panda.kawaii-ai.net/top" target="_blank" rel="noopener">panda.kawaii-ai.net ↗</a></p>
       </div>
       <div class="gallery">
@@ -653,6 +668,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>TikTok Shop の出店ブランドは、売上（GMV）は見えても「本当に利益が出ているか」「どの商品・施策が効いたか」が分かりにくく、縦型動画の量産も大きな負担だった。</dd></div><div><dt>Problem<span>課題</span></dt><dd>新しいSaaSを、機能の多さではなく「何が解決できるか」で一瞬で伝え、展示会や商談で信頼を得ること。</dd></div><div><dt>Role<span>役割</span></dt><dd>ロゴ、機能紹介ビジュアル、展示会パネル、名刺、広告動画などビジュアル全般と、Webサイトの一部デザイン（チーム開発）。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>価値を一文に絞ったメッセージ設計（「GMVではなく“利益”で可視化」「最短5分で動画制作」）。2つのプロダクトを TORIHADA AI TOOLS として同じ体系で揃え、認知を積み上げる構成にした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>2サービスのWebサイトを公開。Web・展示会・営業ツールまで、一貫したブランドで展開。</dd></div></dl>
     </div>
   </article>
 
@@ -661,8 +677,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>ヤフーアプリ × ホロカ</h3>
-        <p class="desc">LINEヤフーの「Yahoo! JAPAN」アプリと、VTuberグループ「ホロライブ」および「ホロライブオフィシャルカードゲーム（ホロカ）」による初のコラボキャンペーン（2026年2月27日〜3月31日）。キービジュアルを起点に、特設サイト（PC / SP）と検定コンテンツの画面、応援ミッションを伝えるバナー、アプリ内の掲載枠や告知バナーまで、キャンペーンに関わるクリエイティブを一貫してデザインした。キャラクターの魅力を活かしながら、「何をすると何がもらえるのか」が一目で伝わる構成を意識した。</p>
-        <div class="marquee" aria-hidden="true"><div>Web design · Landing page · Key visual · Banner · Campaign · Yahoo! JAPAN · 2026 · Web design · Landing page · Key visual · Banner · Campaign · Yahoo! JAPAN · 2026 · </div></div>
+        
         <p class="links-p"><a href="https://ly-hololive-campaign.com/" target="_blank" rel="noopener">ly-hololive-campaign.com ↗</a><span class="ended">※ キャンペーンは終了しました</span></p>
       </div>
       <div class="gallery">
@@ -678,6 +693,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>LINEヤフー「Yahoo! JAPAN」アプリと、ホロライブ／ホロライブオフィシャルカードゲーム（ホロカ）による初のコラボキャンペーン（2026年2月27日〜3月31日）。</dd></div><div><dt>Problem<span>課題</span></dt><dd>ファンにアプリを使ってもらい、検定・友だち追加・きせかえ・フォローの4つの応援ミッションまで迷わず進んでもらうこと。</dd></div><div><dt>Role<span>役割</span></dt><dd>キービジュアル、特設サイト（PC / SP）、検定画面、ミッションバナー、アプリ内掲載枠のデザイン。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>「何をすると何がもらえるか」を1ミッション＝1枚のカードで提示。Web からの流入にはQRとストア導線、アプリ内からは即参加ボタンと、入口ごとに導線を分けて離脱を防いだ。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>LINEヤフー株式会社のプレスリリース（2026年3月3日）で発表され、多くのメディアで紹介された。</dd></div></dl>
     </div>
   </article>
 
@@ -686,8 +702,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>FANME イベント &amp; グッズ</h3>
-        <p class="desc">クリエイターが自分のショップを開き、写真・ボイス・動画・ガチャなどのデジタルコンテンツやグッズを、ファンへ直接届けられるプラットフォーム「FANME」。“好き”を応援したいファンと、それに応えたいクリエイターをつなぐ場所として、サービスの熱量をビジュアルで伝えることを担当した。新規クリエイターを呼び込む出品キャンペーンから、ハロウィン、クリスマス、バレンタイン、アワードまで、企画ごとに世界観を大胆に描き分けながら、FANMEらしいポップで親しみやすいトーンは一貫させた。イベントごとの特設ページ（SP）では、開催期間や参加方法、ランキング賞品まで、長いページでも迷わず読み進められる構成を設計した。アクリルスタンド、缶バッジ、キーホルダーなど、ファンの手元に“推し”を届けるオリジナルグッズのデザインも手がけた。</p>
-        <div class="marquee" aria-hidden="true"><div>Web design · Event page · Banner · Campaign · Goods · Acrylic stand · FANME · 2025〜26 · Web design · Event page · Banner · Campaign · Goods · Acrylic stand · FANME · 2025〜26 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -701,6 +716,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>クリエイターが写真・ボイス・動画・ガチャやグッズを、ファンへ直接届けられるプラットフォーム「FANME」。</dd></div><div><dt>Problem<span>課題</span></dt><dd>新規クリエイターの出品を増やしながら、既存のファンとクリエイターには毎月のイベントで“参加する理由”を作り続けること。</dd></div><div><dt>Role<span>役割</span></dt><dd>出品キャンペーン・季節イベントのバナー、イベント特設ページ（SP）、オリジナルグッズのデザイン。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>イベントごとに世界観は大胆に変えつつ、開催期間・参加方法・賞品の情報設計は共通フォーマット化。制作スピードと、長いページでも迷わない読みやすさを両立させた。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>ハロウィン、AWARD、クリスマス、バレンタイン、クラファンなど、2025〜26年のイベントを継続して運用。</dd></div></dl>
     </div>
   </article>
 
@@ -709,8 +725,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>クライアントワーク</h3>
-        <p class="desc">TORIHADAで担当した、さまざまなクライアントの広告ビジュアル。ミツカン公式5アカウントが6日間リレーで開催した「#夏のミツカン便」では、DAY1〜6のキービジュアルをシリーズで設計し、DAY1の投稿はX上で18.4万回表示、3,561件のリポストを記録した。ほかに、BANOBAGI × ニシコリのコラボキャンペーン「真夏のスターライト」のフライヤーとビジュアル、楽天「LUXURY BEAUTY」のメイク企画バナー、docomo「ahamo」のバナー、ミツカン「フルーティス」の診断キャンペーン、トップバリュ×リンネルのタイアップ、美容・食品の販促パネルなど。ブランドごとのトーンに合わせて、写真・イラスト・文字組みを使い分けた。</p>
-        <div class="marquee" aria-hidden="true"><div>Key visual · SNS campaign · Banner · Flyer · Beauty · Food · Panel · 2025〜26 · Key visual · SNS campaign · Banner · Flyer · Beauty · Food · Panel · 2025〜26 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -726,6 +741,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 08</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>SNSマーケティング会社として、食品・美容・通信など多業種のキャンペーンを並行して担当。</dd></div><div><dt>Problem<span>課題</span></dt><dd>ブランドのトーンを守りながら、タイムラインで指を止め、応募や拡散まで進んでもらうクリエイティブを短納期でつくること。</dd></div><div><dt>Role<span>役割</span></dt><dd>キービジュアル、バナー、フライヤー、販促パネルのデザイン。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>ミツカン「#夏のミツカン便」では、6日間のリレー企画を共通フレーム＋日替わりの季節背景でシリーズ化。お中元BOXが毎日埋まっていく演出で、最終日まで見続けたくなる流れを設計した。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>「#夏のミツカン便」DAY1の投稿は X で18.4万回表示、3,561リポスト、1,881リプライ。</dd></div></dl>
     </div>
   </article>
 
@@ -734,8 +750,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>TikTok Shop 学生インターン募集 LP</h3>
-        <p class="desc">TORIHADA × TikTok Shop の学生向け長期インターンを募集するランディングページ。「大学生のうちに、SNSで“売る力”を。」というメッセージを軸に、会社紹介、仕事の流れ、働く雰囲気、安心ポイント、応募条件、選考フロー、FAQまでを1ページに設計した。SPを主軸にしつつ、PCでは目次ナビゲーションと縦長コンテンツを並べたレイアウトに展開。写真・数字・ステップ表現でテンポよく情報を整理し、初めての人でも自分ごととして読み進められる構成にした。</p>
-        <div class="marquee" aria-hidden="true"><div>Web design · Landing page · Recruiting · SP / PC · TORIHADA · 2026 · Web design · Landing page · Recruiting · SP / PC · TORIHADA · 2026 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -746,6 +761,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>TORIHADA × TikTok Shop の学生向け長期インターンの採用。</dd></div><div><dt>Problem<span>課題</span></dt><dd>SNS販売の経験がない大学生にも仕事内容と安心感を伝え、応募の心理的なハードルを下げること。</dd></div><div><dt>Role<span>役割</span></dt><dd>LPの構成設計とデザイン（PC / SP）。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>読み手の不安が解消される順に構成（会社 → 仕事の4ステップ → 雰囲気 → 安心ポイント → 条件 → 選考 → FAQ）。SPでは応募ボタンを常に表示し、PCでは目次ナビで全体像を見渡せるようにした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>「1分で完了」の応募まで、1ページで完結する導線をつくった。</dd></div></dl>
     </div>
   </article>
 
@@ -754,8 +770,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>社内テーマビジュアル「WONDER」</h3>
-        <p class="desc">TORIHADA社内で定期的に掲げるテーマのキービジュアル。テーマ「Aiming for Wonder」と、そこに込めた「感動を届ける」「驚きを作る」「ワクワク好奇心」という3つの想いを、テクノロジーと植物が絡み合いながら育っていく世界観で表現し、PC壁紙として展開した。さらにモーション版を制作。文字が虹色に揺らめき、3つのキーワードが順に灯り、光の粒やシャボン玉が舞い上がる映像で、静止画だけでは伝えきれない“ワクワク”を形にした。</p>
-        <div class="marquee" aria-hidden="true"><div>Key visual · Motion graphics · Multimedia · Poster · Wallpaper · Internal branding · 2026 · Key visual · Motion graphics · Multimedia · Poster · Wallpaper · Internal branding · 2026 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -766,6 +781,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>TORIHADA社内で定期的に掲げるテーマ。今期は「Aiming for Wonder」。</dd></div><div><dt>Problem<span>課題</span></dt><dd>スローガンを掲げて終わりにせず、社員が日常的に目にして思い出せる形にすること。</dd></div><div><dt>Role<span>役割</span></dt><dd>キービジュアル、PC壁紙2種、モーション版の制作。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>毎日開くPCの壁紙を接点に選び、「感動を届ける」「驚きを作る」「ワクワク好奇心」の3つの想いを一枚の世界観に。モーション版ではキーワードを順に灯し、言葉の順番まで伝わるようにした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>社内のPC壁紙として展開。</dd></div></dl>
     </div>
   </article>
 
@@ -774,8 +790,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Donkey Kong Country 駅貼り広告</h3>
-        <p class="desc">任天堂ドンキーコングとUSJのイベントに向けた駅シート貼りのビジュアル企画。壁を突き破って現れるドンキーと「12.11 OPEN」のテープで、駅の通路そのものを告知の舞台にした。</p>
-        <div class="marquee" aria-hidden="true"><div>Graphic design · Art direction · Illustration · OOH · 2024.8〜2024.11 · Graphic design · Art direction · Illustration · OOH · 2024.8〜2024.11 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -790,6 +805,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>任天堂ドンキーコングとUSJの新エリアのオープン告知（12.11 OPEN）。</dd></div><div><dt>Problem<span>課題</span></dt><dd>足早に通り過ぎる駅の通路で、一瞬で気づかせ、オープン日を覚えてもらうこと。</dd></div><div><dt>Role<span>役割</span></dt><dd>ビジュアル企画、デザイン、イラスト。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>壁を突き破って現れるドンキーで、通路そのものを体験に変えた。オープン日を規制テープのように繰り返し、どの位置からでも目に入るようにした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>2024年8〜11月に企画・制作し、駅構内に掲出。</dd></div></dl>
     </div>
   </article>
 
@@ -798,8 +814,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Monster Energy 年間キャンペーン</h3>
-        <p class="desc">年間プロモーション戦略に沿ったKVの立案から、店頭POP・ポスター・ブースまで印刷物デザイン全般を担当。eスポーツ、モトクロス、音楽フェスなど、場面ごとに強いビジュアルを展開した。</p>
-        <div class="marquee" aria-hidden="true"><div>Key visual · Art direction · Print · Event booth · 2024〜2025 · Key visual · Art direction · Print · Event booth · 2024〜2025 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -812,6 +827,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 05</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>年間プロモーション戦略に基づく、eスポーツ、モトクロス、音楽フェスなど多様な接点での展開。</dd></div><div><dt>Problem<span>課題</span></dt><dd>接点ごとに異なるターゲットへ、ブランドの強さを保ったまま一年中訴求し続けること。</dd></div><div><dt>Role<span>役割</span></dt><dd>KVの立案と、店頭POP・ポスター・ブースなど印刷物全般のアートディレクション。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>年間KVを軸に、接点ごとの展開ルールを決めて量産。POPからブースまで、どこで見ても同じブランドだと分かるトーンを保った。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>年間を通じて、複数のイベントと店頭で展開。</dd></div></dl>
     </div>
   </article>
 
@@ -820,8 +836,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>WELLCNE &amp; FAROme 展示会</h3>
-        <p class="desc">通院支援アプリ WELLCNE と FAROme の展示会ビジュアル。ブースの空間グラフィック、パネル、パンフレットまで、医療サービスをやさしく伝えるトーンで統一した。</p>
-        <div class="marquee" aria-hidden="true"><div>Exhibition · Graphic design · Illustration · Booth · 2024〜2025 · Exhibition · Graphic design · Illustration · Booth · 2024〜2025 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -835,6 +850,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>通院支援アプリ WELLCNE と、QOL向上支援アプリ FAROme の展示会出展。</dd></div><div><dt>Problem<span>課題</span></dt><dd>医療・介護の来場者に、アプリの価値を短い時間で、やさしく理解してもらうこと。</dd></div><div><dt>Role<span>役割</span></dt><dd>ブースの空間グラフィック、パネル、パンフレット。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>機能の説明からではなく、「どこにいても診察の呼び出しが届く」など利用シーンをイラストで見せ、“困りごとの解決”から伝える構成にした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>ブースからパンフレットまでトーンを統一し、出展ツール一式を制作。</dd></div></dl>
     </div>
   </article>
 
@@ -843,8 +859,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>P&amp;G EXPO パネル・ポスター</h3>
-        <p class="desc">P&amp;G EXPO イベントのパネル、ポスターなどのデザインを担当。Lenor、BOLD、Ariel、Oral-B など各ブランドの市場データを、遠くからでも読めるインフォグラフィックに整理した。</p>
-        <div class="marquee" aria-hidden="true"><div>Event panels · Infographics · Poster · Brand · 2024〜2025 · Event panels · Infographics · Poster · Brand · 2024〜2025 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -857,6 +872,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 05</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>P&amp;G EXPO。Lenor、BOLD、Ariel、Oral-B など複数ブランドの展示。</dd></div><div><dt>Problem<span>課題</span></dt><dd>各ブランドの市場データを、会場で離れた位置からでも一目で理解できるようにすること。</dd></div><div><dt>Role<span>役割</span></dt><dd>パネル、ポスター、インフォグラフィック。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>1パネル1メッセージに絞って数字を大きく扱い、ブランドカラーで領域を識別。複数ブランドでもルールを揃えて読み比べやすくした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>複数ブランドの展示パネルを、統一したルールで制作。</dd></div></dl>
     </div>
   </article>
 
@@ -865,8 +881,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>DAMA collection 年間誌面制作</h3>
-        <p class="desc">人気ファッション誌 DAMA の年間デザインを担当。コンセプト提案、表紙、ラフ、撮影アシスタント、画像レタッチ、完成稿まで、誌面づくりの全工程に関わった。</p>
-        <div class="marquee" aria-hidden="true"><div>Layout · Editorial · Retouch · Photography · 2024〜2025 · Layout · Editorial · Retouch · Photography · 2024〜2025 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -883,6 +898,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 09</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>人気ファッション誌「DAMA collection」の年間誌面。</dd></div><div><dt>Problem<span>課題</span></dt><dd>毎号異なるテーマを、限られた制作期間の中で、誌面としての一貫性を保ちながら仕上げること。</dd></div><div><dt>Role<span>役割</span></dt><dd>コンセプト提案、表紙、ラフ、撮影アシスタント、画像レタッチ、完成稿。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>撮影前にラフで必要なカットを洗い出し、撮影と誌面を一体で設計。企画から入稿まで全工程に関わることで、手戻りを減らした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>1年間、誌面づくりの全工程を担当。</dd></div></dl>
     </div>
   </article>
 
@@ -891,8 +907,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Co Point</h3>
-        <p class="desc">コンビニでコインを貯めて、ポイントとして使えるサービス。リサーチとペルソナ設計から、専用コイントレーのプロダクトデザイン、アプリの UI まで一貫して設計した。</p>
-        <div class="marquee" aria-hidden="true"><div>UI/UX · Product design · Research · AI-powered · 2023.6〜2023.10 · UI/UX · Product design · Research · AI-powered · 2023.6〜2023.10 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -911,6 +926,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 11</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>コンビニのレジで出る小銭をコインとして貯め、ポイントとして使えるサービスの企画。</dd></div><div><dt>Problem<span>課題</span></dt><dd>小銭のやり取りの手間をなくし、ポイント化をユーザーにとって自然な行動にすること。</dd></div><div><dt>Role<span>役割</span></dt><dd>リサーチ、ペルソナ設計、専用コイントレーのプロダクトデザイン、アプリのUI。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>リサーチからペルソナを定義し、レジでの実際の行動に合わせて、ハード（トレー）とソフト（アプリ）を一体で設計した。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>課題の発見からコンセプト、UIまで、サービス全体を一人で設計。</dd></div></dl>
     </div>
   </article>
 
@@ -919,8 +935,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>ぼくら 夜行性動物</h3>
-        <p class="desc">深夜でも、ストレスなく美味しい食事ができる外食ブランド。ロゴとブランドの世界観から、Web サイト、注文アプリの UI、広告プロモーションまでを手がけた。</p>
-        <div class="marquee" aria-hidden="true"><div>Branding · Web design · UI/UX · Promotion · 2021.10〜2023.10 · Branding · Web design · UI/UX · Promotion · 2021.10〜2023.10 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -935,6 +950,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 07</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>深夜でもストレスなく美味しい食事ができる外食ブランド。</dd></div><div><dt>Problem<span>課題</span></dt><dd>夜に働く人・活動する人に向けたブランド体験を、店舗・Web・アプリで一貫させること。</dd></div><div><dt>Role<span>役割</span></dt><dd>ロゴと世界観、Webサイト、注文アプリのUI、広告プロモーション。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>「夜行性動物」というキャラクター性でブランドを擬人化し、注文アプリまで同じ世界観で設計した。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>ブランドの立ち上げから、デジタルの接点まで一貫して設計。</dd></div></dl>
     </div>
   </article>
 
@@ -943,8 +959,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Perrier &amp; S.Pellegrino</h3>
-        <p class="desc">上海ネスレのグラフィックデザイナーとして、炭酸入りミネラルウォーター Perrier と S.Pellegrino の商品ページ、バナーなどのビジュアルデザインを担当した。</p>
-        <div class="marquee" aria-hidden="true"><div>Graphic design · E-commerce · Banner · Brand visual · 2017.4〜2017.9 · Graphic design · E-commerce · Banner · Brand visual · 2017.4〜2017.9 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -955,6 +970,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>上海ネスレのEC。炭酸入りミネラルウォーター Perrier と S.Pellegrino。</dd></div><div><dt>Problem<span>課題</span></dt><dd>似たカテゴリーの2ブランドの違いを、ECの限られた画面で伝え分けること。</dd></div><div><dt>Role<span>役割</span></dt><dd>商品ページ、バナーなどのビジュアルデザイン。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>Perrier は鮮やかで遊び心のあるトーン、S.Pellegrino は上質な食事のシーンと、ブランドの人格で描き分けた。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>両ブランドのEC商品ページとバナーを担当。</dd></div></dl>
     </div>
   </article>
 
@@ -963,8 +979,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>TOAmart パッケージデザイン</h3>
-        <p class="desc">幅広いジャンルの商品パッケージを担当。ターゲットと競合を分析し、予算とコストを踏まえて、美しさと実用性を両立するデザインに仕上げ、自社の売上向上に貢献した。</p>
-        <div class="marquee" aria-hidden="true"><div>Packaging · Product · Graphic design · Retail · 2022.4〜2023.10 · Packaging · Product · Graphic design · Retail · 2022.4〜2023.10 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -978,6 +993,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 06</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>自社EC「TOAmart」で扱う、幅広いジャンルの商品。</dd></div><div><dt>Problem<span>課題</span></dt><dd>予算とコストの制約の中で、競合と並んでも選ばれるパッケージにすること。</dd></div><div><dt>Role<span>役割</span></dt><dd>パッケージデザイン（約9ヶ月で80件以上）。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>ターゲットと競合を分析し、商品開発部と会議を重ねてコンセプトをすり合わせ。美しさと実用性、コストのバランスを取った。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>担当した商品が社内売上の上位に。東京ビッグサイトの展示会にも入選。</dd></div></dl>
     </div>
   </article>
 
@@ -986,8 +1002,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>42SF 企画展</h3>
-        <p class="desc">「生命、宇宙、そして万物についての究極の疑問への答え」をテーマに、Web デザインと 100 ページを超えるイラストレーションを制作。多摩美術大学クリエーション Web 賞に入選した。</p>
-        <div class="marquee" aria-hidden="true"><div>Web design · Illustration · Exhibition · Award · 2021.6〜2021.12 · Web design · Illustration · Exhibition · Award · 2021.6〜2021.12 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -998,6 +1013,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 03</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Context<span>背景</span></dt><dd>多摩美術大学の企画展。</dd></div><div><dt>Problem<span>課題</span></dt><dd>「生命、宇宙、そして万物についての究極の疑問への答え」という抽象的なテーマを、体験として伝えること。</dd></div><div><dt>Role<span>役割</span></dt><dd>Webデザインと、100ページを超えるイラストレーション。</dd></div><div><dt>Approach<span>打ち手</span></dt><dd>テーマを章立てし、Web上で物語のように読み進められる構成にした。</dd></div><div><dt>Outcome<span>成果</span></dt><dd>多摩美術大学クリエーションWeb賞に入選。</dd></div></dl>
     </div>
   </article>
 
@@ -1006,8 +1022,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>じっとり</h3>
-        <p class="desc">空気は重く、蒸発した雨が毛穴の奥にまでまとわりつくように。皮膚から垂れ落ちる水分が、自分の汗なのか雨粒なのか、もはや判別がつかない。湿度を写した写真シリーズ。</p>
-        <div class="marquee" aria-hidden="true"><div>Photography · Series · Texture · Mood · 2021.6〜2021.8 · Photography · Series · Texture · Mood · 2021.6〜2021.8 · </div></div>
+        
       </div>
       <div class="gallery">
         <div class="g-track" tabindex="0" aria-label="Project images, scroll sideways">
@@ -1016,6 +1031,7 @@ html,body{overflow-x:clip; max-width:100%}
         </div>
         <div class="g-bar"><span class="g-count">01 / 01</span><span class="g-prog"><i></i></span><span class="g-btns"><button type="button" class="g-prev" aria-label="Previous image">←</button><button type="button" class="g-next" aria-label="Next image">→</button></span></div>
       </div>
+      <dl class="cs"><div><dt>Personal<span>個人制作</span></dt><dd>空気は重く、蒸発した雨が毛穴の奥にまでまとわりつくように。皮膚から垂れ落ちる水分が、自分の汗なのか雨粒なのか、もはや判別がつかない。湿度を写した写真シリーズ。</dd></div></dl>
     </div>
   </article>
 </section>
@@ -1046,22 +1062,22 @@ html,body{overflow-x:clip; max-width:100%}
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const DISC = [
-    {name:'AIツール', en:'WHALE & PANDA', full:'AI product brands', hex:'2026', c:'#2bb5a8', to:'#w1', no:'01', gl:'#2bb5a8'},
-    {name:'キャンペーン', en:'Yahoo! JAPAN', full:'key visuals & banners', hex:'2026', c:'#f3c6dc', to:'#w2', no:'02', gl:'#8fb4ff'},
-    {name:'イベント・グッズ', en:'FANME', full:'event pages, banners & goods', hex:'2025〜26', c:'#e6e0f6', to:'#w3', no:'03', gl:'#b49cff'},
-    {name:'クライアント', en:'Client Works', full:'advertising visuals', hex:'2025〜26', c:'#dfe6ea', to:'#w4', no:'04', gl:'#26b7bc'},
-    {name:'LP', en:'TikTok Shop Intern', full:'landing page', hex:'2026', c:'#1f4fd8', to:'#w16', no:'05', gl:'#5b8cff'},
-    {name:'テーマビジュアル', en:'WONDER', full:'key visual & motion', hex:'2026', c:'#b9a3e8', to:'#w17', no:'06', gl:'#f2a7d8'},
-    {name:'駅貼り広告', en:'Donkey Kong Country', full:'key visuals', hex:'2024', c:'#f5f8f7', to:'#w5', no:'07', gl:'#f2c94c'},
-    {name:'年間KV', en:'Monster Energy', full:'campaign art direction', hex:'2024〜25', c:'#dceff0', to:'#w6', no:'08', gl:'#9be33a'},
-    {name:'展示会', en:'WELLCNE & FAROme', full:'exhibition graphics', hex:'2024〜25', c:'#a9e2e4', to:'#w7', no:'09', gl:'#2cc6c0'},
-    {name:'EXPOパネル', en:'P&G', full:'event panels', hex:'2024〜25', c:'#7fd3d6', to:'#w8', no:'10', gl:'#2f6bff'},
-    {name:'誌面デザイン', en:'DAMA collection', full:'editorial layouts', hex:'2024〜25', c:'#4fc6ca', to:'#w9', no:'11', gl:'#5fa8d8'},
-    {name:'アプリ設計', en:'Co Point', full:'UI/UX design', hex:'2023', c:'#26b7bc', to:'#w10', no:'12', gl:'#ff9a2e'},
-    {name:'ブランド', en:'Bokura', full:'brand identities', hex:'2021〜23', c:'#1e8e92', to:'#w11', no:'13', gl:'#c6f24a'},
-    {name:'ビジュアル', en:'Perrier', full:'product visuals', hex:'2017', c:'#0e5e61', to:'#w12', no:'14', gl:'#1fbf6a'},
-    {name:'パッケージ', en:'TOAmart', full:'packaging', hex:'2022〜23', c:'#16393b', to:'#w13', no:'15', gl:'#8b7bff'},
-    {name:'企画展', en:'42SF', full:'illustrations', hex:'2021', c:'#2b2f30', to:'#w14', no:'16', gl:'#c9d2dc'}
+    {name:'AIツール', en:'WHALE & PANDA', full:'AI tools for TikTok sellers', hex:'2026', c:'#2bb5a8', to:'#w1', no:'01', gl:'#2bb5a8'},
+    {name:'キャンペーン', en:'Yahoo! JAPAN', full:'a fan campaign, web to app', hex:'2026', c:'#f3c6dc', to:'#w2', no:'02', gl:'#8fb4ff'},
+    {name:'イベント・グッズ', en:'FANME', full:'events for a creator platform', hex:'2025〜26', c:'#e6e0f6', to:'#w3', no:'03', gl:'#b49cff'},
+    {name:'クライアント', en:'Client Works', full:'SNS campaigns people share', hex:'2025〜26', c:'#dfe6ea', to:'#w4', no:'04', gl:'#26b7bc'},
+    {name:'LP', en:'TikTok Shop Intern', full:'a recruiting landing page', hex:'2026', c:'#1f4fd8', to:'#w16', no:'05', gl:'#5b8cff'},
+    {name:'テーマビジュアル', en:'WONDER', full:'an internal culture visual', hex:'2026', c:'#b9a3e8', to:'#w17', no:'06', gl:'#f2a7d8'},
+    {name:'駅貼り広告', en:'Donkey Kong Country', full:'a station-wide launch ad', hex:'2024', c:'#f5f8f7', to:'#w5', no:'07', gl:'#f2c94c'},
+    {name:'年間KV', en:'Monster Energy', full:'a year-round brand campaign', hex:'2024〜25', c:'#dceff0', to:'#w6', no:'08', gl:'#9be33a'},
+    {name:'展示会', en:'WELLCNE & FAROme', full:'a healthcare app booth', hex:'2024〜25', c:'#a9e2e4', to:'#w7', no:'09', gl:'#2cc6c0'},
+    {name:'EXPOパネル', en:'P&G', full:'data you can read from afar', hex:'2024〜25', c:'#7fd3d6', to:'#w8', no:'10', gl:'#2f6bff'},
+    {name:'誌面デザイン', en:'DAMA collection', full:'a fashion magazine, all year', hex:'2024〜25', c:'#4fc6ca', to:'#w9', no:'11', gl:'#5fa8d8'},
+    {name:'アプリ設計', en:'Co Point', full:'a points service, end to end', hex:'2023', c:'#26b7bc', to:'#w10', no:'12', gl:'#ff9a2e'},
+    {name:'ブランド', en:'Bokura', full:'a late-night food brand', hex:'2021〜23', c:'#1e8e92', to:'#w11', no:'13', gl:'#c6f24a'},
+    {name:'ビジュアル', en:'Perrier', full:'e-commerce for Perrier', hex:'2017', c:'#0e5e61', to:'#w12', no:'14', gl:'#1fbf6a'},
+    {name:'パッケージ', en:'TOAmart', full:'packaging that sells', hex:'2022〜23', c:'#16393b', to:'#w13', no:'15', gl:'#8b7bff'},
+    {name:'企画展', en:'42SF', full:'a sci-fi exhibition', hex:'2021', c:'#2b2f30', to:'#w14', no:'16', gl:'#c9d2dc'}
   ];
   const COVERS=['images/079.webp','images/104.webp','images/105.webp','images/106.webp','images/129.webp','images/131.webp','images/083.webp','images/084.webp','images/085.webp','images/086.webp','images/087.webp','images/088.webp','images/089.webp','images/090.webp','images/091.webp','images/092.webp'];
   DISC.forEach((d,i)=>{ d.img = COVERS[i] || ''; });
@@ -1144,7 +1160,7 @@ html,body{overflow-x:clip; max-width:100%}
     setTimeout(()=>finish(null), 7000);
   })();
 
-  function cardHTML(d,i){ return '<div class="chip'+(d.img ? ' has-img' : '')+'" style="background:'+d.c+'">'+(d.img ? '<img class="ci" alt="" decoding="async" src="'+d.img+'">' : '')+'<em>No.'+(d.no || String(i+1).padStart(2,'0'))+'</em></div><div class="name">'+d.name+'</div><div class="en">'+d.en+'</div><div class="hex">'+d.hex+'</div><div class="hole"></div>'; }
+  function cardHTML(d,i){ return '<div class="chip'+(d.img ? ' has-img' : '')+'" style="background:'+d.c+'">'+(d.img ? '<img class="ci" alt="" loading="eager" onload="this.parentNode.classList.add(\'ld\')" src="'+d.img+'">' : '')+'<em>No.'+(d.no || String(i+1).padStart(2,'0'))+'</em></div><div class="name">'+d.name+'</div><div class="en">'+d.en+'</div><div class="hex">'+d.hex+'</div><div class="hole"></div>'; }
   function buildFan(el, interactive){
     const strips = DISC.map((d,i)=>{
       const s = document.createElement(interactive ? 'button' : 'div');
