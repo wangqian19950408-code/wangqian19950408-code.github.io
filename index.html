@@ -547,6 +547,83 @@ html,body{overflow-x:clip; max-width:100%}
 .work{box-shadow:0 -1px 0 rgba(255,255,255,.08), 0 -18px 36px -24px rgba(0,0,0,.7) !important}
 /* cover thumbnails: a style change once each image arrives makes Safari repaint it inside the 3D fan */
 .strip .chip.ld{outline:0 solid transparent}
+
+/* ===== smoothness first (2026-11-02): cheaper paint everywhere ===== */
+.cursor{mix-blend-mode:normal !important; box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+.strip .chip.has-img .ci, .fan .strip.on .chip.has-img .ci, .lb-stage .strip .chip.has-img .ci{filter:none !important; transform:none !important; transition:none !important}
+.strip{box-shadow:0 18px 30px -18px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.22) !important}
+.work{box-shadow:none !important}
+.work::after{display:none !important}
+.card{transform:none !important}
+.bgfx,.hero canvas{display:none !important}
+.lb-bg,.me-dlg::backdrop{-webkit-backdrop-filter:none !important; backdrop-filter:none !important}
+.nav{-webkit-backdrop-filter:none !important; backdrop-filter:none !important; background:rgba(5,6,6,.96) !important}
+.big{contain:layout paint}
+.strip::before,.strip::after{display:none !important}
+.strip{box-shadow:none !important; border:1px solid rgba(255,255,255,.24) !important}
+
+/* ===== hero helix (2026-11-02): premium 3D spiral of the works, compositor-only animation ===== */
+.fan-wrap .fan,.fan-wrap .floor{display:none !important}
+.wm-clip{display:none !important}
+.helix-wrap{position:absolute; left:50%; top:43%; width:0; height:0; z-index:4; perspective:1700px; perspective-origin:50% 40%}
+.helix{position:absolute; left:0; top:0; transform-style:preserve-3d; transform:rotateX(-13deg)}
+.helix-spin{position:absolute; left:0; top:0; transform-style:preserve-3d; will-change:transform}
+.helix-wrap{touch-action:pan-y}
+.helix-wrap.off{visibility:hidden}
+@keyframes hxspin{to{transform:rotateY(-360deg)}}
+.hx-card{position:absolute; left:-66px; top:-108px; width:132px; height:216px; display:block; transform-style:preserve-3d; color:#fff; text-decoration:none}
+.hx-face,.hx-back{position:absolute; inset:0; border-radius:14px; overflow:hidden; -webkit-backface-visibility:hidden; backface-visibility:hidden}
+.hx-face{background:#101313; box-shadow:inset 0 0 0 1px rgba(255,255,255,.2); transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.hx-face img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.hx-face::after{content:""; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(140deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 34%,rgba(255,255,255,0) 62%,rgba(0,0,0,.18) 100%); box-shadow:inset 0 0 0 1px rgba(255,255,255,.22); pointer-events:none}
+.hx-cap{position:absolute; left:0; right:0; bottom:0; padding:26px 12px 11px; background:linear-gradient(to top,rgba(4,6,6,.82),rgba(4,6,6,0)); display:grid; gap:1px; z-index:1}
+.hx-cap b{font-size:10px; font-weight:600; letter-spacing:.14em; opacity:.75}
+.hx-cap em{font-style:normal; font-size:13px; font-weight:600; line-height:1.3}
+.hx-cap i{font-style:normal; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; opacity:.6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.hx-back{transform:rotateY(180deg); background:#121616; box-shadow:inset 0 0 0 1px rgba(255,255,255,.12); display:grid; place-items:center}
+.hx-back b{font-size:40px; font-weight:300; letter-spacing:-.02em; color:rgba(255,255,255,.22)}
+.hx-card:hover .hx-face,.hx-card:focus-visible .hx-face{transform:translateZ(46px) scale(1.05)}
+.hx-shadow{position:absolute; left:-340px; top:200px; width:680px; height:90px; border-radius:50%; background:radial-gradient(closest-side,rgba(0,0,0,.55),rgba(0,0,0,0)); pointer-events:none}
+@media (max-width:860px){
+  .helix-wrap{top:47%}
+  .hx-card{left:-38px; top:-62px; width:76px; height:124px}
+  .hx-face,.hx-back{border-radius:10px}
+  .hx-cap{padding:18px 8px 7px} .hx-cap em{font-size:10.5px} .hx-cap i{display:none} .hx-cap b{font-size:8.5px}
+  .hx-back b{font-size:30px}
+  .hx-shadow{left:-200px; top:120px; width:400px; height:56px}
+  .hx-cap em{font-size:9.5px}
+}
+.hero .big,.hero .sig,.hero .tl,.hero .scroll-hint{position:absolute; z-index:6}
+
+.hx-dial{position:absolute; left:0; top:0; border-radius:50%; border:1px solid rgba(255,255,255,.14); pointer-events:none}
+.hx-core{position:absolute; left:0; transform:translateX(-50%); text-align:center; pointer-events:none; display:flex; align-items:baseline; gap:18px; white-space:nowrap}
+.hx-core span{font-size:11px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:rgba(233,238,238,.72)}
+.hx-core span b{font-weight:500; color:var(--teal); margin-right:.4em}
+.hx-core em{font-style:normal; font-size:11px; letter-spacing:.2em; color:rgba(233,238,238,.38)}
+.hx-core::before,.hx-core::after{content:""; width:46px; height:1px; background:rgba(255,255,255,.2); align-self:center}
+.hx-face{box-shadow:inset 0 0 0 1px rgba(255,255,255,.2), 0 0 0 0 transparent}
+@media (max-width:860px){ .hx-core span{font-size:9px} .hx-core em{display:none} .hx-core::before,.hx-core::after{width:24px} }
+
+/* ring quality: depth shading, glass edge, soft floor light */
+.hx-shade{position:absolute; inset:0; z-index:2; background:#030505; opacity:0; pointer-events:none; border-radius:inherit}
+.hx-face{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22), inset 0 1px 0 rgba(255,255,255,.5) !important}
+.hx-face::before{content:""; position:absolute; left:10%; right:10%; top:0; height:1px; z-index:3; background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent); pointer-events:none}
+.hx-shadow{background:radial-gradient(closest-side,rgba(38,183,188,.14),rgba(0,0,0,.45) 55%,rgba(0,0,0,0)) !important}
+.hx-card img{-webkit-user-drag:none; user-select:none}
+@media (prefers-reduced-motion: reduce){ .helix-spin{animation:none; transform:rotateY(-20deg)} }
+
+/* Portfolio: first-version type (weight 200) + a teal light that slices through it (separate overlay, letters untouched) */
+.big .l i{will-change:auto !important}
+.big{position:absolute}
+.big .glint{position:absolute; left:0; top:0; pointer-events:none; white-space:nowrap; font:inherit; letter-spacing:inherit; line-height:inherit;
+  background:linear-gradient(104deg,transparent 0 45%,rgba(38,183,188,0) 46%,#26b7bc 48.2%,#e9fdfd 50%,#26b7bc 51.8%,rgba(38,183,188,0) 54%,transparent 55% 100%);
+  background-size:230% 100%; background-position:100% 0; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; opacity:0}
+.big.slash .glint{animation:bslash 1.1s cubic-bezier(.5,0,.2,1)}
+@keyframes bslash{0%{background-position:100% 0; opacity:1}96%{opacity:1}100%{background-position:0 0; opacity:0}}
+
+.big .glint{display:none !important}
+.big .l{animation-name:riseP !important; animation-duration:.7s !important; animation-timing-function:cubic-bezier(.2,.9,.2,1) !important}
+@keyframes riseP{from{transform:translateY(115%) rotate(6deg)}to{transform:none}}
 </style>
 </head>
 <body>
@@ -574,9 +651,10 @@ html,body{overflow-x:clip; max-width:100%}
   <div class="arc" id="arc" aria-hidden="true"><i></i></div>
   <canvas class="bgfx" id="bgfx" aria-hidden="true"></canvas>
   <div class="dither" aria-hidden="true"></div>
-  <div class="fan-wrap"><div class="bloom" aria-hidden="true"></div><div class="floor" aria-hidden="true"></div><div class="fan" id="heroFan" aria-label="Disciplines — choose one to jump to the matching project"></div></div>
+  <div class="fan-wrap"><div class="bloom" aria-hidden="true"></div><div class="floor" aria-hidden="true"></div><div class="fan" id="heroFan" aria-hidden="true"></div></div>
+  <div class="helix-wrap"><div class="hx-shadow" aria-hidden="true"></div><div class="helix"><div class="helix-spin" id="helix" aria-label="Works — choose one to jump to the project"></div></div></div>
   <p class="sig">Wang Qian</p>
-  <h1 class="big" id="big" aria-label="Portfolio">Portfolio<sup aria-hidden="true">©26</sup></h1>
+  <h1 class="big" id="big" aria-label="Portfolio">Portfolio<sup aria-hidden="true"></sup></h1>
   <a class="scroll-hint" href="#about">Scroll to explore<i aria-hidden="true"></i></a>
 </section>
 
@@ -652,6 +730,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>WHALE &amp; PANDA</h3>
+        <p class="desc">TikTok Shop向けAIツール「WHALE」「PANDA」のロゴ、Web、展示会、広告まで、ブランド全体を一貫してデザイン。</p>
         
         <p class="links-p"><a href="https://whale.kawaii-ai.net/" target="_blank" rel="noopener">whale.kawaii-ai.net ↗</a><a href="https://panda.kawaii-ai.net/top" target="_blank" rel="noopener">panda.kawaii-ai.net ↗</a></p>
       </div>
@@ -677,6 +756,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>ヤフーアプリ × ホロカ</h3>
+        <p class="desc">Yahoo! JAPANアプリ×ホロライブ初コラボの、キービジュアル・特設サイト・検定画面・バナーをデザイン。</p>
         
         <p class="links-p"><a href="https://ly-hololive-campaign.com/" target="_blank" rel="noopener">ly-hololive-campaign.com ↗</a><span class="ended">※ キャンペーンは終了しました</span></p>
       </div>
@@ -702,6 +782,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>FANME イベント &amp; グッズ</h3>
+        <p class="desc">クリエイタープラットフォーム「FANME」の季節イベントを、バナー・特設ページ・グッズで盛り上げた。</p>
         
       </div>
       <div class="gallery">
@@ -725,6 +806,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>クライアントワーク</h3>
+        <p class="desc">ミツカン、楽天、docomoなど多業種のSNSキャンペーンを、ブランドの空気を守りながら届けた。</p>
         
       </div>
       <div class="gallery">
@@ -750,6 +832,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>TikTok Shop 学生インターン募集 LP</h3>
+        <p class="desc">SNS未経験の大学生にも届く、TORIHADA×TikTok Shopのインターン募集LPと広告クリエイティブ。</p>
         
       </div>
       <div class="gallery">
@@ -771,6 +854,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>社内テーマビジュアル「WONDER」</h3>
+        <p class="desc">社内テーマ「Aiming for Wonder」を、毎日目にするPC壁紙とモーションで社員の日常に届けた。</p>
         
       </div>
       <div class="gallery">
@@ -791,6 +875,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Donkey Kong Country 駅貼り広告</h3>
+        <p class="desc">壁を突き破るドンキーと「12.11 OPEN」のテープで、駅の通路そのものを告知の舞台にした。</p>
         
       </div>
       <div class="gallery">
@@ -815,6 +900,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Monster Energy 年間キャンペーン</h3>
+        <p class="desc">eスポーツから音楽フェスまで、モンスターエナジーの年間KVを軸に販促物全般をディレクション。</p>
         
       </div>
       <div class="gallery">
@@ -837,6 +923,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>WELLCNE &amp; FAROme 展示会</h3>
+        <p class="desc">通院支援アプリの価値を、利用シーンのイラストでやさしく伝えた展示会ビジュアル。</p>
         
       </div>
       <div class="gallery">
@@ -860,6 +947,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>P&amp;G EXPO パネル・ポスター</h3>
+        <p class="desc">P&amp;Gの市場データを、会場の遠くからでも一目で読めるパネルとインフォグラフィックに。</p>
         
       </div>
       <div class="gallery">
@@ -882,6 +970,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>DAMA collection 年間誌面制作</h3>
+        <p class="desc">ファッション誌「DAMA collection」の年間誌面を、企画から撮影・レタッチ・完成稿まで担当。</p>
         
       </div>
       <div class="gallery">
@@ -908,6 +997,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Co Point</h3>
+        <p class="desc">レジの小銭をポイントに変えるサービスを、リサーチからトレー、アプリUIまで一人で設計。</p>
         
       </div>
       <div class="gallery">
@@ -936,6 +1026,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>ぼくら 夜行性動物</h3>
+        <p class="desc">深夜でも安心して食事ができる外食ブランドを、“夜行性動物”の世界観でロゴからアプリまで設計。</p>
         
       </div>
       <div class="gallery">
@@ -960,6 +1051,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>Perrier &amp; S.Pellegrino</h3>
+        <p class="desc">上海ネスレのECで、PerrierとS.Pellegrinoの個性を描き分けた商品ページとバナー。</p>
         
       </div>
       <div class="gallery">
@@ -980,6 +1072,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>TOAmart パッケージデザイン</h3>
+        <p class="desc">自社EC「TOAmart」で約9ヶ月・80件以上のパッケージを手がけ、担当商品は社内売上上位に。</p>
         
       </div>
       <div class="gallery">
@@ -1003,6 +1096,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>42SF 企画展</h3>
+        <p class="desc">“究極の疑問への答え”をテーマに、企画展のWebと100ページ超のイラストを制作（多摩美術大学クリエーションWeb賞入選）。</p>
         
       </div>
       <div class="gallery">
@@ -1023,6 +1117,7 @@ html,body{overflow-x:clip; max-width:100%}
     <div class="body">
       <div>
         <h3>じっとり</h3>
+        <p class="desc">蒸し暑い空気と、肌を伝う水分の曖昧さを写した写真シリーズ。</p>
         
       </div>
       <div class="gallery">
@@ -1049,7 +1144,6 @@ html,body{overflow-x:clip; max-width:100%}
   <ul class="skills">
     <li>Graphic design</li><li>Art direction</li><li>Web design</li><li>UI/UX</li><li>Packaging</li><li>Photography</li>
   </ul>
-  <div class="mini"><div class="fan" id="miniFan" aria-hidden="true"></div></div>
   <div class="links">
     <a href="mailto:wangqian19950408@gmail.com"><small>Email</small>wangqian19950408@gmail.com</a>
     <p class="lk"><small>Based in</small>Tokyo, Japan</p>
@@ -1078,9 +1172,10 @@ html,body{overflow-x:clip; max-width:100%}
     {name:'ブランド', en:'Bokura', full:'a late-night food brand', hex:'2021〜23', c:'#1e8e92', to:'#w11', no:'13', gl:'#c6f24a'},
     {name:'ビジュアル', en:'Perrier', full:'e-commerce for Perrier', hex:'2017', c:'#0e5e61', to:'#w12', no:'14', gl:'#1fbf6a'},
     {name:'パッケージ', en:'TOAmart', full:'packaging that sells', hex:'2022〜23', c:'#16393b', to:'#w13', no:'15', gl:'#8b7bff'},
-    {name:'企画展', en:'42SF', full:'a sci-fi exhibition', hex:'2021', c:'#2b2f30', to:'#w14', no:'16', gl:'#c9d2dc'}
+    {name:'企画展', en:'42SF', full:'a sci-fi exhibition', hex:'2021', c:'#2b2f30', to:'#w14', no:'16', gl:'#c9d2dc'},
+    {name:'写真', en:'じっとり', full:'quiet photographs', hex:'2021', c:'#3b4a52', to:'#w15', no:'17', gl:'#9db4ff'}
   ];
-  const COVERS=['images/079.webp','images/104.webp','images/105.webp','images/106.webp','images/129.webp','images/131.webp','images/083.webp','images/084.webp','images/085.webp','images/086.webp','images/087.webp','images/088.webp','images/089.webp','images/090.webp','images/091.webp','images/092.webp'];
+  const COVERS=['images/079.webp','images/104.webp','images/143.webp','images/106.webp','images/138.webp','images/131.webp','images/083.webp','images/084.webp','images/085.webp','images/139.webp','images/087.webp','images/088.webp','images/089.webp','images/140.webp','images/141.webp','images/092.webp','images/142.webp'];
   DISC.forEach((d,i)=>{ d.img = COVERS[i] || ''; });
 
   /* intro: kinetic type — name decodes, disciplines flash, "Portfolio" rises and the camera dives into the o */
@@ -1272,30 +1367,20 @@ html,body{overflow-x:clip; max-width:100%}
     s.addEventListener('focus',()=>liftT[i]=1);
     s.addEventListener('blur',()=>liftT[i]=0);
   });
-  addEventListener('pointermove',e=>{
-    const dx = (e.clientX / innerWidth) - .5;
-    const dy = (e.clientY / innerHeight) - .5;
-    tiltT = dx * 14; tiltYT = dy * 10;
-    spreadT = spreadBase + (-dy) * 4;
-    hero.style.setProperty('--ang', (dx * 240) + 'deg');
-    if(!reduce) arcEl.style.transform = 'translate('+(-dx*50)+'px,'+(-dy*34)+'px)';
-    hero.style.setProperty('--px', (e.clientX/innerWidth*100)+'%');
-    hero.style.setProperty('--py', (e.clientY/innerHeight*100)+'%');
-    const fr = hero.getBoundingClientRect();
-    hero.style.setProperty('--gx', ((e.clientX-fr.left)/fr.width*100)+'%');
-    hero.style.setProperty('--gy', ((e.clientY-fr.top)/fr.height*100)+'%');
-    mini.style.setProperty('--px', (e.clientX/innerWidth*100)+'%');
-    mini.style.setProperty('--py', (e.clientY/innerHeight*100)+'%');
-  },{passive:true});
+  /* (old fan pointer handler removed — fan replaced by the ring) */
   function onScroll(){ scrollP = Math.min(1, Math.max(0, scrollY / innerHeight)); }
   addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
   function easeOut(t){ return 1 - Math.pow(1-t,3); }
   let heroOn = true, lastHero = '';
   new IntersectionObserver(es=>{ heroOn = es[0].isIntersecting; },{rootMargin:'120px'}).observe(document.querySelector('.hero'));
-  function frame(now){
+  let lastMove = performance.now(), lastScroll = -1;
+  addEventListener('pointermove',()=>{ lastMove = performance.now(); },{passive:true});
+  function settled(now){ if(scrollY !== lastScroll){ lastScroll = scrollY; return false; } return now - lastMove > 1600 && now - intro > 2200; }
+  function frame(now){ return; /* old fan replaced by the helix */
     requestAnimationFrame(frame);
     if(!heroOn) return;
+    if(settled(now)) return;
     const introP = reduce ? 1 : easeOut(Math.min(1,(now-intro)/1400));
     const k = reduce ? 1 : .09;
     spread += (spreadT*(1-scrollP) - spread) * k;
@@ -1314,24 +1399,7 @@ html,body{overflow-x:clip; max-width:100%}
   }
   requestAnimationFrame(frame);
 
-  /* mini fan in footer: opens on hover */
-  const mini = document.getElementById('miniFan');
-  const ms = buildFan(mini, false);
-  hs[0].classList.add('on'); ms[0].classList.add('on');
-  let mOpen = 0, mOpenT = .35;
-  mini.parentElement.addEventListener('pointerenter',()=>mOpenT=1);
-  mini.parentElement.addEventListener('pointerleave',()=>mOpenT=.35);
-  let footOn = false, mLast = -1;
-  new IntersectionObserver(es=>{ footOn = es[0].isIntersecting; },{rootMargin:'100px'}).observe(mini.parentElement);
-  (function mloop(){
-    requestAnimationFrame(mloop);
-    if(!footOn) return;
-    mOpen += (mOpenT-mOpen)*(reduce?1:.08);
-    if(Math.abs(mOpen - mLast) < .0008) return;
-    mLast = mOpen;
-    ms.forEach((s,i)=>{ s.style.transform='rotate('+((i-(n-1)/2)*12*mOpen).toFixed(2)+'deg)'; });
-  })();
-
+  hs[0].classList.add('on');
   /* about card tilt on scroll */
   const card = document.getElementById('card');
   function tiltCard(){
@@ -1390,7 +1458,6 @@ html,body{overflow-x:clip; max-width:100%}
         p = Math.min(1, Math.max(0, (start - rects[i+1]) / (start - end)));
       }
       const q = Math.round(p*100)/100;
-      if(w._p !== q){ w._p = q; w.style.setProperty('--dim', reduce ? 0 : q*.14); }
       /* once a panel is fully covered and only a thin edge of it shows, hide its text so stacked edges never overlap into garbled lines */
       const bur = q >= .98;
       if(w._b !== bur){ w._b = bur; w.classList.toggle('buried', bur); }
@@ -1455,9 +1522,24 @@ html,body{overflow-x:clip; max-width:100%}
   function measureL(){ L.forEach(o=>{ const r = o.el.parentElement.getBoundingClientRect(); o.cx = r.left + r.width/2 + scrollX; o.cy = r.top + r.height/2 + scrollY; }); }
   setTimeout(measureL, 1700); document.fonts && document.fonts.ready.then(()=>setTimeout(measureL, 1700));
   addEventListener('resize', measureL);
+  /* Portfolio: same motion as the intro's "Portfolio" — one weight wave travels through the letters, then they settle thin */
+  let waving = false;
+  function slash(){
+    if(reduce || !heroOn || waving) return; waving = true;
+    const st = performance.now();
+    (function wave(now){
+      const tt = (now - st)/1000;
+      L.forEach((o,i)=>{ const f = Math.max(0, Math.sin(Math.min(Math.PI, (tt*2.6 - i*.16 - .35)*Math.PI))); o.el.style.fontWeight = Math.round((200 + 700*f)/10)*10; o.el.style.transform = f>0 ? 'skewX('+(-10*f).toFixed(1)+'deg)' : ''; });
+      if(tt < 1.15) requestAnimationFrame(wave); else { L.forEach(o=>{ o.el.style.fontWeight = 200; o.el.style.transform = ''; }); waving = false; }
+    })(st);
+  }
+  setTimeout(slash, 1700); setInterval(slash, 7000);
+  big.addEventListener('pointerenter', slash);
+  let wlLast = 0;
   (function wl(now){
+    return; /* soft wave replaced by the blade sweep below */
     requestAnimationFrame(wl);
-    if(!heroOn || o0Unready()) return;
+    if(!heroOn || o0Unready() || now - wlLast < 30) return; wlLast = now;
     const t = now/1000;
     L.forEach((o,i)=>{
       const d = Math.hypot(mxp-(o.cx - scrollX), myp-(o.cy - scrollY));
@@ -1530,6 +1612,7 @@ html,body{overflow-x:clip; max-width:100%}
     }
     let last = 0;
     function draw(now){
+      return; /* hero canvas disabled for smoothness */
       requestAnimationFrame(draw);
       if(!heroOn || now - last < (W < 860 ? 50 : 33)) return; last = now;
       const t = now/1000, groups = blooms(t);
@@ -1748,7 +1831,69 @@ html,body{overflow-x:clip; max-width:100%}
     new IntersectionObserver(es=>{ es[0].isIntersecting ? v.play().catch(()=>{}) : v.pause(); },{threshold:.5}).observe(v);
   });
 
-  function all(){ tiltCard(); stack(); }
+
+  /* hero: works arranged on a slowly turning 3D helix — one compositor-only CSS animation, no per-frame JS */
+  (function(){
+    const hx = document.getElementById('helix'); if(!hx) return;
+    const n = DISC.length, mob = matchMedia('(max-width: 860px)').matches;
+    /* a plain ring: cards face outward around one circle, spaced evenly */
+    const CW = mob ? 76 : 132, CH = Math.round(CW*918/560), R = Math.round(n*(CW+(mob?16:28))/(2*Math.PI)), STEP = 360/n;
+    hx.innerHTML = DISC.map((d,i)=>{
+      const a = i*STEP;
+      return '<a class="hx-card" href="'+d.to+'" style="transform:rotateY('+a.toFixed(2)+'deg) translateZ('+R+'px)" aria-label="'+d.no+' '+d.en+'">'
+        + '<span class="hx-face"><i class="hx-shade"></i>'+(d.img ? '<img alt="" loading="eager" decoding="async" src="'+d.img+'">' : '')+'<span class="hx-cap"><b>'+d.no+'</b><em>'+d.name+'</em><i>'+d.en+'</i></span></span>'
+        + '<span class="hx-back" aria-hidden="true"><b>'+d.no+'</b></span></a>';
+    }).join('');
+    const dial = document.createElement('div'); dial.className = 'hx-dial'; dial.setAttribute('aria-hidden','true');
+    const D = 2*(R+26); dial.style.cssText = 'width:'+D+'px;height:'+D+'px;margin:'+(-D/2)+'px 0 0 '+(-D/2)+'px;transform:translateY('+(CH/2+18)+'px) rotateX(90deg)';
+    hx.appendChild(dial);
+    const core = document.createElement('div'); core.className = 'hx-core'; core.setAttribute('aria-hidden','true');
+    core.innerHTML = '<span><b>'+n+'</b> Selected works</span><em>2017 — 2026</em>';
+    core.style.top = Math.round(CH/2 + R*0.24 + (mob?40:64)) + 'px';
+    hx.closest('.helix-wrap').appendChild(core);
+    const wrap = hx.closest('.helix-wrap');
+    const fitHelix = ()=>{ const ring = 2*R + CW + 48; const s = Math.min(1, (innerHeight-(mob?60:120))/760, (innerWidth - (mob?16:80))/ring); wrap.style.transform = 'scale('+s.toFixed(3)+')'; };
+    fitHelix(); addEventListener('resize', fitHelix);
+    /* motion: slow auto-spin; hovering over the ring and sliding left/right turns it directly (no press needed), with a little glide after */
+    const heroEl = document.querySelector('.hero'), cards = [...hx.querySelectorAll('.hx-card')], shades = cards.map(c=>c.querySelector('.hx-shade'));
+    const AUTO = reduce ? 0 : -360/90;            /* degrees per second */
+    let ang = 0, vel = 0, over = false, lastX = null, last = performance.now(), onScreen = true;
+    wrap.addEventListener('pointerenter', e=>{ over = true; lastX = e.clientX; });
+    wrap.addEventListener('pointerleave', ()=>{ over = false; lastX = null; });
+    wrap.addEventListener('pointermove', e=>{
+      if(lastX !== null){ const dx = e.clientX - lastX; ang += dx*.42; vel = vel*.6 + dx*.42*24; }
+      lastX = e.clientX;
+    }, {passive:true});
+    /* trackpad two-finger swipe / horizontal wheel turns it too */
+    wrap.addEventListener('wheel', e=>{
+      const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if(!dx) return;                       /* vertical scroll: let the page scroll */
+      e.preventDefault();
+      ang -= dx*.28; vel = -dx*.28*20;
+    }, {passive:false});
+    /* touch: swipe to turn */
+    let tx = null;
+    wrap.addEventListener('touchstart', e=>{ tx = e.touches[0].clientX; }, {passive:true});
+    wrap.addEventListener('touchmove', e=>{ const x = e.touches[0].clientX; ang += (x - tx)*.42; vel = (x - tx)*.42*24; tx = x; }, {passive:true});
+    cards.forEach(c=>c.addEventListener('dragstart', e=>e.preventDefault()));
+    new IntersectionObserver(es=>{ onScreen = es[0].isIntersecting; wrap.classList.toggle('off', !onScreen); }).observe(heroEl);
+    const lastShade = [];
+    (function spin(now){
+      requestAnimationFrame(spin);
+      const dt = Math.min(.05, (now - last)/1000); last = now;
+      if(!onScreen) return;
+      vel *= Math.pow(.02, dt); if(over && lastX !== null) vel *= .9;
+      ang += ((over ? 0 : AUTO) + (over ? 0 : vel)) * dt;
+      const r = ang;
+      hx.style.transform = 'rotateY(' + r.toFixed(2) + 'deg)';
+      for(let i=0;i<n;i++){
+        const f = Math.cos((i*STEP + r) * Math.PI/180);          /* 1 = facing us, -1 = far side */
+        const o = Math.round(Math.max(0, (1 - f)/2) * 0.62 * 100)/100;
+        if(o !== lastShade[i]){ lastShade[i] = o; shades[i].style.opacity = o; }
+      }
+    })(last);
+  })();
+  function all(){ stack(); }
   let ticking = false;
   function schedule(){ if(ticking) return; ticking = true; requestAnimationFrame(()=>{ ticking = false; all(); }); }
   addEventListener('scroll', schedule, {passive:true});
