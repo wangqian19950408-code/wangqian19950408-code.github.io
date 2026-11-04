@@ -625,6 +625,14 @@ html,body{overflow-x:clip; max-width:100%}
 .big .glint{display:none !important}
 .big .l{animation-name:riseP !important; animation-duration:.7s !important; animation-timing-function:cubic-bezier(.2,.9,.2,1) !important}
 @keyframes riseP{from{transform:translateY(115%) rotate(6deg)}to{transform:none}}
+
+/* About portrait: shown at (almost) native pixel density so it stays sharp — never upscaled by transforms */
+.me-full img{transform:none !important; object-position:50% 28% !important}
+@media (min-width:861px){
+  .me-full{background:#0c0f0f}
+  .me-full img{position:absolute; left:0; top:0; width:100% !important; height:min(100%, 600px) !important}
+  .me-full .mf-cap{top:min(100%, 600px); bottom:auto; background:none !important; padding:22px clamp(18px,2vw,26px)}
+}
 </style>
 </head>
 <body>
@@ -671,7 +679,7 @@ html,body{overflow-x:clip; max-width:100%}
         <div class="hole"></div>
       </figure>
       <div class="me-full">
-        <img src="images/002.webp" alt="Portrait of Wang Qian on a boat at golden hour">
+        <img src="images/144.webp" width="640" height="1024" alt="Portrait of Wang Qian on a boat at golden hour">
         <span class="tint" aria-hidden="true"></span>
         <div class="mf-cap">
           <span class="mf-no">No.00</span>
@@ -1414,7 +1422,7 @@ html,body{overflow-x:clip; max-width:100%}
 
   /* word roller */
   const track = document.getElementById('wordTrack');
-  const words = DISC.map(d=>d.full);
+  const words = ['graphic visuals','advertising','websites','UI / UX','brands'];
   track.innerHTML = words.concat(words[0]).map(w=>'<span><b>'+w+'</b></span>').join('');
   /* a phrase wider than the window is scaled down to fit on one line (never wraps into the next word) */
   function fitWords(){ const W = track.parentElement.clientWidth; track.querySelectorAll('b').forEach(b=>{ b.style.transform=''; const w = b.offsetWidth; b.style.transform = w > W ? 'scale('+(W/w).toFixed(3)+')' : ''; }); }
