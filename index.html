@@ -175,7 +175,8 @@ button.strip{font:inherit; text-align:left; -webkit-appearance:none; appearance:
 .roller button:hover{background:var(--ink); color:var(--teal)}
 .word-window{flex:1; height:1.15em; overflow:hidden; font-size:clamp(30px,4vw,52px); font-weight:300; font-style:normal; text-align:center; position:relative}
 .word-track{transition:transform .7s cubic-bezier(.7,0,.2,1)}
-.word-track span{display:block; height:1.15em; line-height:1.15em}
+.word-track span{display:block; height:1.15em; line-height:1.15em; white-space:nowrap}
+.word-track b{display:inline-block; font-weight:inherit; transform-origin:0 60%}
 .bio{font-size:18px; max-width:56ch; margin:0}
 .facts{display:flex; flex-wrap:wrap; gap:8px 28px; font-size:14px; font-weight:500}
 
@@ -1414,7 +1415,10 @@ html,body{overflow-x:clip; max-width:100%}
   /* word roller */
   const track = document.getElementById('wordTrack');
   const words = DISC.map(d=>d.full);
-  track.innerHTML = words.concat(words[0]).map(w=>'<span>'+w+'</span>').join('');
+  track.innerHTML = words.concat(words[0]).map(w=>'<span><b>'+w+'</b></span>').join('');
+  /* a phrase wider than the window is scaled down to fit on one line (never wraps into the next word) */
+  function fitWords(){ const W = track.parentElement.clientWidth; track.querySelectorAll('b').forEach(b=>{ b.style.transform=''; const w = b.offsetWidth; b.style.transform = w > W ? 'scale('+(W/w).toFixed(3)+')' : ''; }); }
+  fitWords(); addEventListener('resize', fitWords); if(document.fonts) document.fonts.ready.then(fitWords);
   let wi = 0, timer;
   function go(i, instant){
     wi = i;
