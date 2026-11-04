@@ -628,11 +628,21 @@ html,body{overflow-x:clip; max-width:100%}
 
 /* About portrait: shown at (almost) native pixel density so it stays sharp — never upscaled by transforms */
 .me-full img{transform:none !important; object-position:50% 28% !important}
+/* About layout for balance: the photo sits beside the headline + bio only; experience / education / skills run the full card width below */
 @media (min-width:861px){
-  .me-full{background:#0c0f0f}
-  .me-full img{position:absolute; left:0; top:0; width:100% !important; height:min(100%, 600px) !important}
-  .me-full .mf-cap{top:min(100%, 600px); bottom:auto; background:none !important; padding:22px clamp(18px,2vw,26px)}
+  .card{grid-template-columns:minmax(260px,1fr) 1.75fr !important}
+  .card > .col:not(.solo){display:contents}
+  .card > .col.solo{grid-column:1; grid-row:1 / span 4; min-height:0}
+  .card > .col:not(.solo) > .row{grid-column:2}
+  .card > .col:not(.solo) > .row:nth-child(n+5){grid-column:1 / -1}
+  .card > .col:not(.solo) > .row:nth-child(5){border-top:1.5px dashed rgba(15,37,38,.35)}
+  .card > .col:not(.solo) > .row:nth-child(4){border-bottom:0}
+  .me-full{border-radius:14px 0 0 0 !important}
 }
+
+/* titles on one line; descriptions break at natural Japanese phrases */
+.work .body h3{white-space:nowrap}
+.work .desc{word-break:auto-phrase; text-wrap:pretty}
 </style>
 </head>
 <body>
@@ -790,7 +800,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w3"><span>03</span><span class="t">FANME</span><span class="m cat">Web / Banner / Goods</span><span class="m">2025〜26</span></a>
     <div class="body">
       <div>
-        <h3>FANME イベント &amp; グッズ</h3>
+        <h3>FANME</h3>
         <p class="desc">クリエイタープラットフォーム「FANME」の季節イベントを、バナー・特設ページ・グッズで盛り上げた。</p>
         
       </div>
@@ -840,7 +850,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w16"><span>05</span><span class="t">TikTok Shop Intern</span><span class="m cat">Web / LP / Ad</span><span class="m">2026</span></a>
     <div class="body">
       <div>
-        <h3>TikTok Shop 学生インターン募集 LP</h3>
+        <h3>TikTok Shop Intern</h3>
         <p class="desc">SNS未経験の大学生にも届く、TORIHADA×TikTok Shopのインターン募集LPと広告クリエイティブ。</p>
         
       </div>
@@ -862,7 +872,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w17"><span>06</span><span class="t">WONDER</span><span class="m cat">Key visual / Motion</span><span class="m">2026</span></a>
     <div class="body">
       <div>
-        <h3>社内テーマビジュアル「WONDER」</h3>
+        <h3>WONDER</h3>
         <p class="desc">社内テーマ「Aiming for Wonder」を、毎日目にするPC壁紙とモーションで社員の日常に届けた。</p>
         
       </div>
@@ -883,7 +893,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w5"><span>07</span><span class="t">Donkey Kong Country</span><span class="m cat">Graphic design</span><span class="m">2024</span></a>
     <div class="body">
       <div>
-        <h3>Donkey Kong Country 駅貼り広告</h3>
+        <h3>Donkey Kong</h3>
         <p class="desc">壁を突き破るドンキーと「12.11 OPEN」のテープで、駅の通路そのものを告知の舞台にした。</p>
         
       </div>
@@ -908,7 +918,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w6"><span>08</span><span class="t">Monster Energy</span><span class="m cat">Art direction</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
-        <h3>Monster Energy 年間キャンペーン</h3>
+        <h3>Monster Energy</h3>
         <p class="desc">eスポーツから音楽フェスまで、モンスターエナジーの年間KVを軸に販促物全般をディレクション。</p>
         
       </div>
@@ -931,7 +941,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w7"><span>09</span><span class="t">WELLCNE &amp; FAROme</span><span class="m cat">Exhibition</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
-        <h3>WELLCNE &amp; FAROme 展示会</h3>
+        <h3>WELLCNE &amp; FAROme</h3>
         <p class="desc">通院支援アプリの価値を、利用シーンのイラストでやさしく伝えた展示会ビジュアル。</p>
         
       </div>
@@ -955,7 +965,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w8"><span>10</span><span class="t">P&amp;G</span><span class="m cat">Event graphics</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
-        <h3>P&amp;G EXPO パネル・ポスター</h3>
+        <h3>P&amp;G EXPO</h3>
         <p class="desc">P&amp;Gの市場データを、会場の遠くからでも一目で読めるパネルとインフォグラフィックに。</p>
         
       </div>
@@ -978,7 +988,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w9"><span>11</span><span class="t">DAMA collection</span><span class="m cat">Editorial</span><span class="m">2024〜25</span></a>
     <div class="body">
       <div>
-        <h3>DAMA collection 年間誌面制作</h3>
+        <h3>DAMA collection</h3>
         <p class="desc">ファッション誌「DAMA collection」の年間誌面を、企画から撮影・レタッチ・完成稿まで担当。</p>
         
       </div>
@@ -1059,7 +1069,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w12"><span>14</span><span class="t">Perrier</span><span class="m cat">Graphic design</span><span class="m">2017</span></a>
     <div class="body">
       <div>
-        <h3>Perrier &amp; S.Pellegrino</h3>
+        <h3>Perrier</h3>
         <p class="desc">上海ネスレのECで、PerrierとS.Pellegrinoの個性を描き分けた商品ページとバナー。</p>
         
       </div>
@@ -1080,7 +1090,7 @@ html,body{overflow-x:clip; max-width:100%}
     <a class="tab" href="#w13"><span>15</span><span class="t">TOAmart</span><span class="m cat">Packaging</span><span class="m">2022〜23</span></a>
     <div class="body">
       <div>
-        <h3>TOAmart パッケージデザイン</h3>
+        <h3>TOAmart</h3>
         <p class="desc">自社EC「TOAmart」で約9ヶ月・80件以上のパッケージを手がけ、担当商品は社内売上上位に。</p>
         
       </div>
@@ -1904,6 +1914,21 @@ html,body{overflow-x:clip; max-width:100%}
         if(o !== lastShade[i]){ lastShade[i] = o; shades[i].style.opacity = o; }
       }
     })(last);
+  })();
+  /* work titles always stay on one line: a title wider than its column is set smaller to fit */
+  (function(){
+    const hs = [...document.querySelectorAll('.work .body h3')];
+    function fit(){
+      hs.forEach(h=>{
+        h.style.fontSize = '';
+        const box = h.clientWidth; if(!box) return;
+        const need = h.scrollWidth;
+        h._fit = need > box ? parseFloat(getComputedStyle(h).fontSize) * box/need * .98 : parseFloat(getComputedStyle(h).fontSize);
+      });
+      const s = Math.floor(Math.min(...hs.map(h=>h._fit||999)));
+      hs.forEach(h=>{ h.style.fontSize = s + 'px'; });
+    }
+    fit(); addEventListener('resize', fit); if(document.fonts) document.fonts.ready.then(fit);
   })();
   function all(){ stack(); }
   let ticking = false;
