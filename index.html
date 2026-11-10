@@ -644,6 +644,12 @@ html,body{overflow-x:clip; max-width:100%}
 /* titles on one line; descriptions break at natural Japanese phrases */
 .work .body h3{white-space:nowrap}
 .work .desc{word-break:auto-phrase; text-wrap:pretty}
+
+/* platform fit (2026-11-04) */
+@supports (height:100svh){ .hero{height:100svh !important; min-height:560px} }      /* iOS / Android toolbars no longer cover the bottom of the hero */
+@media (max-width:860px){ .hx-cap b{font-size:9.5px} .hx-cap em{font-size:11px} }
+@media (hover:none){ .helix-wrap{cursor:default} }
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
 </style>
 </head>
 <body>
@@ -1875,7 +1881,7 @@ html,body{overflow-x:clip; max-width:100%}
     core.style.top = Math.round(CH/2 + R*0.24 + (mob?40:64)) + 'px';
     hx.closest('.helix-wrap').appendChild(core);
     const wrap = hx.closest('.helix-wrap');
-    const fitHelix = ()=>{ const ring = 2*R + CW + 48; const s = Math.min(1, (innerHeight-(mob?60:120))/760, (innerWidth - (mob?16:80))/ring); wrap.style.transform = 'scale('+s.toFixed(3)+')'; };
+    const fitHelix = ()=>{ const ring = 2*R + CW + 48; const s = Math.min(mob ? 1.15 : 1.45, (innerHeight-(mob?60:120))/(mob?640:760), (innerWidth - (mob?8:80))/ring); wrap.style.transform = 'scale('+s.toFixed(3)+')'; };
     fitHelix(); addEventListener('resize', fitHelix);
     /* motion: slow auto-spin; hovering over the ring and sliding left/right turns it directly (no press needed), with a little glide after */
     const heroEl = document.querySelector('.hero'), cards = [...hx.querySelectorAll('.hx-card')], shades = cards.map(c=>c.querySelector('.hx-shade'));
